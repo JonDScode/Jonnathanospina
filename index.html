@@ -4,834 +4,304 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonnathan Ospina - Dev Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/design-system.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Fractal Canvas Background */
-        #fractal-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        /* Navigation */
-        .nav-container {
-            position: relative;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e9ecef;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            padding: 1.5rem;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: 2px solid #6c757d;
-            color: #495057;
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-btn:hover {
-            background: #343a40;
-            color: white;
-            border-color: #343a40;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(52, 58, 64, 0.3);
-        }
-
-        .nav-btn.active {
-            background: #212529;
-            color: white;
-            border-color: #212529;
-        }
-
-        /* Hero Section */
+        /* ── HERO ── */
         .hero {
             position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 6rem 2rem;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #212529;
-            letter-spacing: -0.02em;
+        #hyperbolic-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                ellipse 70% 60% at 50% 50%,
+                rgba(10,10,15,0.55) 0%,
+                rgba(10,10,15,0.82) 60%,
+                rgba(10,10,15,0.97) 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
 
         .hero h2 {
-            font-size: 1.5rem;
-            color: #6c757d;
-            margin-bottom: 3rem;
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            color: var(--muted);
             font-weight: 400;
-            max-width: 600px;
+            margin-bottom: 3rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.04em;
         }
 
-        /* Platonic Solids Container */
-        #platonic-solids-container {
+        .hero-cta {
             display: flex;
+            gap: 1rem;
             justify-content: center;
-            align-items: center;
-            margin: 40px 0;
-            min-height: 400px;
-        }
-        
-        #platonic-solids-container canvas {
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            max-width: 100%;
-            height: auto;
+            flex-wrap: wrap;
         }
 
-        @media (max-width: 768px) {
-            #platonic-solids-container {
-                min-height: 300px;
-                margin: 20px 0;
-            }
-        }
-
-        /* Skills Section */
+        /* ── SKILLS GRID ── */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1px;
+            background: var(--border);
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 10;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
         .skill-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid #e9ecef;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border-radius: 0;
+            background: var(--surface);
+            padding: 2.5rem 2rem;
+            transition: background 0.25s ease;
         }
 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent);
-            transition: all 0.6s ease;
-        }
+        .skill-card:hover { background: var(--elevated); }
 
-        .skill-card:hover::before {
-            left: 100%;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border-color: #adb5bd;
-        }
-
-        .skill-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            filter: grayscale(1);
+        .skill-index {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent);
+            opacity: 0.5;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.15em;
         }
 
         .skill-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #212529;
+            font-size: 1rem;
             font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.02em;
         }
 
         .skill-description {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: #6c757d;
-            font-weight: 400;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--muted);
         }
 
-        /* Footer */
-        .footer {
-            background: rgba(33, 37, 41, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid #495057;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-            color: #adb5bd;
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer a {
-            color: #dee2e6;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .footer a:hover {
-            color: white;
-        }
-
-        /* Status Bar */
-        .status-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(33, 37, 41, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid #495057;
-            padding: 0.8rem 1rem;
-            font-size: 0.8rem;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #adb5bd;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #28a745;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero h2 { font-size: 1.2rem; }
-            .navbar { flex-wrap: wrap; gap: 1rem; padding: 1rem; }
-            .nav-btn { padding: 0.6rem 1.5rem; font-size: 0.8rem; }
-            .hero { padding: 4rem 1rem; }
-            .skills-grid { grid-template-columns: 1fr; padding: 2rem 1rem; }
+            .hero { padding: 7rem 1.5rem 3rem; }
+            .skills-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Fractal Canvas Background -->
-    <canvas id="fractal-canvas"></canvas>
-
     <!-- Navigation -->
     <header class="nav-container">
         <nav class="navbar">
-            <a href="#home" class="nav-btn active">HOME</a>
-            <a href="pages/cv.html" class="nav-btn">CV</a>
-            <a href="pages/projects.html" class="nav-btn">PROJECTS</a>
-            <a href="pages/blog.html" class="nav-btn">BLOG</a>
+            <a href="#home" class="nav-logo">jonnathan.ospina</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-btn active" data-i18n="nav.home">Inicio</a>
+                <a href="pages/cv.html" class="nav-btn" data-i18n="nav.cv">CV</a>
+                <a href="pages/projects.html" class="nav-btn" data-i18n="nav.projects">Proyectos</a>
+                <a href="pages/blog.html" class="nav-btn" data-i18n="nav.blog">Blog</a>
+            </div>
         </nav>
-    </header>        <!-- Hero Section -->
-        <main class="hero" id="home">
-            <h1>JONNATHAN OSPINA</h1>
-            <h2>Developer • AI Engineer • Data Scientist</h2>
-            
-            <div id="platonic-solids-container">
-                <!-- p5.js canvas will be inserted here -->
-            </div>
+    </header>
 
-        <div class="skills-grid" id="skills">
-            <div class="skill-card">
-                <span class="skill-icon">�</span>
-                <h3 class="skill-title">DEVELOPMENT</h3>
-                <p class="skill-description">Full-stack development with modern technologies. Building scalable web applications and robust backend systems.</p>
-            </div>
-            
-            <div class="skill-card">
-                <span class="skill-icon">🤖</span>
-                <h3 class="skill-title">ARTIFICIAL INTELLIGENCE</h3>
-                <p class="skill-description">Machine Learning, Deep Learning, and AI model development. Creating intelligent solutions for complex problems.</p>
-            </div>
-            
-            <div class="skill-card">
-                <span class="skill-icon">📊</span>
-                <h3 class="skill-title">DATA SCIENCE</h3>
-                <p class="skill-description">Data analysis, visualization, and statistical modeling. Extracting insights from complex datasets.</p>
-            </div>
-            
-            <div class="skill-card">
-                <span class="skill-icon">⚡</span>
-                <h3 class="skill-title">OPTIMIZATION</h3>
-                <p class="skill-description">Performance optimization and algorithm design. Making systems faster and more efficient.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="hyperbolic-canvas"></canvas>
+
+        <div class="hero-content">
+            <h2 data-i18n="index.subtitle">AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agentes</h2>
+            <div class="hero-cta">
+                <a href="pages/projects.html" class="btn-primary" data-i18n="index.cta.projects">Ver proyectos</a>
+                <a href="pages/cv.html" class="btn-ghost" data-i18n="index.cta.cv">Currículum</a>
             </div>
         </div>
-    </main>
+    </section>
+
+    <!-- Skills Section -->
+    <div class="skills-grid" id="skills">
+        <div class="skill-card">
+            <div class="skill-index">01 /</div>
+            <h3 class="skill-title" data-i18n="index.card1.title">AI Engineering</h3>
+            <p class="skill-description" data-i18n="index.card1.desc">Diseño e implementación de sistemas inteligentes basados en LLMs, pipelines de datos y arquitecturas de agentes. IA lista para producción, con enfoque en calidad y trazabilidad.</p>
+        </div>
+        <div class="skill-card">
+            <div class="skill-index">02 /</div>
+            <h3 class="skill-title" data-i18n="index.card2.title">Data Science</h3>
+            <p class="skill-description" data-i18n="index.card2.desc">Modelado estadístico, análisis predictivo y visualización avanzada. Transformando datos complejos en conocimiento accionable con metodología rigurosa.</p>
+        </div>
+        <div class="skill-card">
+            <div class="skill-index">03 /</div>
+            <h3 class="skill-title" data-i18n="index.card3.title">GenAI &amp; Agentes</h3>
+            <p class="skill-description" data-i18n="index.card3.desc">Arquitecturas RAG, Prompt Flows, embeddings y sistemas multi-agente. Construyendo soluciones de IA generativa con Azure AI y modelos de lenguaje de última generación.</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 Jonnathan Ospina - Portfolio</p>
         <p><a href="mailto:jonnathanospinam@gmail.com">jonnathanospinam@gmail.com</a></p>
-        <p style="font-size: 0.85rem; margin-top: 1rem; opacity: 0.7;">Building the future, one algorithm at a time</p>
+        <p class="footer-mono" data-i18n="index.footer">© 2026 Jonnathan Ospina &nbsp;·&nbsp; Construyendo el futuro, un algoritmo a la vez</p>
     </footer>
 
     <!-- Status Bar -->
     <div class="status-bar">
         <div class="status-item">
             <div class="status-dot"></div>
-            <span>ONLINE</span>
-        </div>
-        <div class="status-item">
-            <span>Version: 2025.1.0</span>
+            <span>online</span>
         </div>
         <div class="status-item">
             <span id="current-time"></span>
         </div>
     </div>
 
+    <script src="JS/i18n.js"></script>
     <script>
-        // Fractal Canvas Background
-        class FractalRenderer {
-            constructor(canvas) {
-                this.canvas = canvas;
-                this.ctx = canvas.getContext('2d');
-                this.time = 0;
-                this.mouseX = 0;
-                this.mouseY = 0;
-                
-                this.resize();
-                this.setupEventListeners();
-                this.animate();
-            }
-            
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-            
-            setupEventListeners() {
-                window.addEventListener('resize', () => this.resize());
-                window.addEventListener('mousemove', (e) => {
-                    this.mouseX = e.clientX / window.innerWidth;
-                    this.mouseY = e.clientY / window.innerHeight;
-                });
-            }
-            
-            drawSierpinskiTriangle(x, y, size, depth) {
-                if (depth === 0) {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(x, y);
-                    this.ctx.lineTo(x + size, y);
-                    this.ctx.lineTo(x + size/2, y - size * Math.sqrt(3)/2);
-                    this.ctx.closePath();
-                    
-                    const alpha = 0.1 + Math.sin(this.time * 0.001 + x * 0.01) * 0.05;
-                    this.ctx.strokeStyle = `rgba(108, 117, 125, ${alpha})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.stroke();
-                    return;
-                }
-                
-                const newSize = size / 2;
-                this.drawSierpinskiTriangle(x, y, newSize, depth - 1);
-                this.drawSierpinskiTriangle(x + newSize, y, newSize, depth - 1);
-                this.drawSierpinskiTriangle(x + newSize/2, y - newSize * Math.sqrt(3)/2, newSize, depth - 1);
-            }
-            
-            drawKochSnowflake(x, y, size, angle, depth) {
-                if (depth === 0) {
-                    const endX = x + Math.cos(angle) * size;
-                    const endY = y + Math.sin(angle) * size;
-                    
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(x, y);
-                    this.ctx.lineTo(endX, endY);
-                    
-                    const alpha = 0.1 + Math.sin(this.time * 0.002 + x * 0.02) * 0.03;
-                    this.ctx.strokeStyle = `rgba(73, 80, 87, ${alpha})`;
-                    this.ctx.lineWidth = 0.5;
-                    this.ctx.stroke();
-                    return;
-                }
-                
-                const segmentSize = size / 3;
-                
-                // First segment
-                this.drawKochSnowflake(x, y, segmentSize, angle, depth - 1);
-                
-                // Second segment
-                const x1 = x + Math.cos(angle) * segmentSize;
-                const y1 = y + Math.sin(angle) * segmentSize;
-                this.drawKochSnowflake(x1, y1, segmentSize, angle - Math.PI/3, depth - 1);
-                
-                // Third segment
-                const x2 = x1 + Math.cos(angle - Math.PI/3) * segmentSize;
-                const y2 = y1 + Math.sin(angle - Math.PI/3) * segmentSize;
-                this.drawKochSnowflake(x2, y2, segmentSize, angle + Math.PI/3, depth - 1);
-                
-                // Fourth segment
-                const x3 = x2 + Math.cos(angle + Math.PI/3) * segmentSize;
-                const y3 = y2 + Math.sin(angle + Math.PI/3) * segmentSize;
-                this.drawKochSnowflake(x3, y3, segmentSize, angle, depth - 1);
-            }
-            
-            drawMandelbrotSet() {
-                const width = this.canvas.width;
-                const height = this.canvas.height;
-                const imageData = this.ctx.createImageData(width, height);
-                const data = imageData.data;
-                
-                const zoom = 0.5 + this.mouseX * 2;
-                const offsetX = -0.5 + this.mouseX * 0.3;
-                const offsetY = this.mouseY * 0.3;
-                
-                for (let x = 0; x < width; x += 4) {
-                    for (let y = 0; y < height; y += 4) {
-                        const zx = (x - width/2) / (width/4) / zoom + offsetX;
-                        const zy = (y - height/2) / (height/4) / zoom + offsetY;
-                        
-                        let cx = zx;
-                        let cy = zy;
-                        let i = 0;
-                        const maxIterations = 50;
-                        
-                        while (cx*cx + cy*cy < 4 && i < maxIterations) {
-                            const tmp = cx*cx - cy*cy + zx;
-                            cy = 2*cx*cy + zy;
-                            cx = tmp;
-                            i++;
-                        }
-                        
-                        const index = (y * width + x) * 4;
-                        if (i === maxIterations) {
-                            data[index] = 33;     // R
-                            data[index + 1] = 37; // G
-                            data[index + 2] = 41; // B
-                            data[index + 3] = 30; // A
-                        } else {
-                            const intensity = i / maxIterations;
-                            data[index] = 108 * intensity;     // R
-                            data[index + 1] = 117 * intensity; // G
-                            data[index + 2] = 125 * intensity; // B
-                            data[index + 3] = 20 * intensity;  // A
-                        }
-                    }
-                }
-                
-                this.ctx.putImageData(imageData, 0, 0);
-            }
-            
-            render() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                // Draw geometric patterns
-                const centerX = this.canvas.width / 2;
-                const centerY = this.canvas.height / 2;
-                
-                // Animated Sierpinski triangles
-                for (let i = 0; i < 5; i++) {
-                    const x = centerX + Math.cos(this.time * 0.0005 + i * Math.PI * 0.4) * 200;
-                    const y = centerY + Math.sin(this.time * 0.0005 + i * Math.PI * 0.4) * 200;
-                    this.drawSierpinskiTriangle(x - 50, y + 50, 100, 4);
-                }
-                
-                // Koch snowflake patterns
-                for (let i = 0; i < 6; i++) {
-                    const angle = (i * Math.PI * 2 / 6) + this.time * 0.0003;
-                    const x = centerX + Math.cos(angle) * 300;
-                    const y = centerY + Math.sin(angle) * 300;
-                    this.drawKochSnowflake(x, y, 80, angle, 3);
-                }
-                
-                // Geometric grid
-                this.ctx.strokeStyle = 'rgba(173, 181, 189, 0.1)';
-                this.ctx.lineWidth = 0.5;
-                const gridSize = 50;
-                for (let x = 0; x < this.canvas.width; x += gridSize) {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(x, 0);
-                    this.ctx.lineTo(x, this.canvas.height);
-                    this.ctx.stroke();
-                }
-                for (let y = 0; y < this.canvas.height; y += gridSize) {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(0, y);
-                    this.ctx.lineTo(this.canvas.width, y);
-                    this.ctx.stroke();
-                }
-            }
-            
-            animate() {
-                this.time = Date.now();
-                this.render();
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-        
-        // Navigation functionality
-        function setupNavigation() {
-            const navBtns = document.querySelectorAll('.nav-btn');
-            
-            navBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    // For external pages, let the default behavior handle navigation
-                    if (btn.getAttribute('href').includes('.html')) {
-                        return; // Let the browser handle navigation to other pages
-                    }
-                    
-                    e.preventDefault();
-                    
-                    // Remove active class from all buttons
-                    navBtns.forEach(b => b.classList.remove('active'));
-                    // Add active class to clicked button
-                    btn.classList.add('active');
-                    
-                    // Get target section
-                    const targetId = btn.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-        
-        // Update time in status bar
-        function updateTime() {
-            const timeElement = document.getElementById('current-time');
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('es-ES', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            timeElement.textContent = timeString;
-        }
-        
-        // Smooth scroll for internal links
-        function setupSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-        
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize fractal canvas
-            const canvas = document.getElementById('fractal-canvas');
-            new FractalRenderer(canvas);
-            
-            // Setup navigation and interactions
-            setupNavigation();
-            setupSmoothScroll();
-            
-            // Update time immediately and then every minute
-            updateTime();
-            setInterval(updateTime, 60000);
-            
-            // Add subtle parallax effect
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const canvas = document.getElementById('fractal-canvas');
-                canvas.style.transform = `translateY(${scrolled * 0.1}px)`;
-            });
-        });
-    </script>
+    /* ═══════════════════════════════════════════════════════════════
+       MOSAICO HIPERBÓLICO — Disco de Poincaré
+       Teselado {5,4}: pentágonos hiperbólicos, 4 por vértice
+       Transformaciones de Möbius para generación exacta de tiles
+    ═══════════════════════════════════════════════════════════════ */
+    (function () {
+        const canvas = document.getElementById('hyperbolic-canvas');
+        const ctx    = canvas.getContext('2d');
+        let W, H, R, cx, cy, t = 0;
 
-    <!-- Platonic Solids p5.js Script -->
-    <script>
-        let rotationX = 0;
-        let rotationY = 0;
-        let currentSolid = 0;
-        let transitionPhase = 0;
-        let lastSwitchTime = 0;
-        let mouseInteracting = false;
-        
-        const solids = [
-            'tetrahedron',
-            'cube', 
-            'octahedron',
-            'dodecahedron',
-            'icosahedron'
-        ];
-        
-        const solidNames = [
-            'Tetrahedron',
-            'Hexahedron (Cube)',
-            'Octahedron', 
-            'Dodecahedron',
-            'Icosahedron'
-        ];
+        const mul  = ([ar,ai],[br,bi]) => [ar*br-ai*bi, ar*bi+ai*br];
+        const sub  = ([ar,ai],[br,bi]) => [ar-br, ai-bi];
+        const div  = ([ar,ai],[br,bi]) => { const d=br*br+bi*bi; return [(ar*br+ai*bi)/d,(ai*br-ar*bi)/d]; };
+        const mod2 = ([r,i]) => r*r+i*i;
+        const conj = ([r,i]) => [r,-i];
+        const scale= ([r,i],s) => [r*s, i*s];
 
-        function setup() {
-            // Make canvas responsive
-            let canvasWidth = min(windowWidth * 0.8, 600);
-            let canvasHeight = min(windowHeight * 0.5, 400);
-            
-            let canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
-            canvas.parent('platonic-solids-container');
-            canvas.style('border-radius', '8px');
-            canvas.style('box-shadow', '0 4px 20px rgba(0, 0, 0, 0.1)');
+        function mobius(z, a) { return div(sub(z, a), sub([1,0], mul(conj(a), z))); }
+
+        function diskRotate([x,y], theta) {
+            return [x*Math.cos(theta)-y*Math.sin(theta), x*Math.sin(theta)+y*Math.cos(theta)];
         }
 
-        function windowResized() {
-            let canvasWidth = min(windowWidth * 0.8, 600);
-            let canvasHeight = min(windowHeight * 0.5, 400);
-            resizeCanvas(canvasWidth, canvasHeight);
+        function drawGeodesic(p1, p2, strokeColor, lineW) {
+            const [x1,y1] = p1, [x2,y2] = p2;
+            if (x1*x1+y1*y1 < 1e-9 || x2*x2+y2*y2 < 1e-9) {
+                ctx.beginPath(); ctx.moveTo(cx+x1*R,cy+y1*R); ctx.lineTo(cx+x2*R,cy+y2*R);
+                ctx.strokeStyle=strokeColor; ctx.lineWidth=lineW; ctx.stroke(); return;
+            }
+            const ma2=x1*x1+y1*y1, mb2=x2*x2+y2*y2;
+            const ex=x1*(1+mb2)-x2*(1+ma2), ey=y1*(1+mb2)-y2*(1+ma2);
+            const f=2*(x1*y2-y1*x2);
+            if (Math.abs(f) < 1e-9) {
+                ctx.beginPath(); ctx.moveTo(cx+x1*R,cy+y1*R); ctx.lineTo(cx+x2*R,cy+y2*R);
+                ctx.strokeStyle=strokeColor; ctx.lineWidth=lineW; ctx.stroke(); return;
+            }
+            const ox=ey/f, oy=-ex/f;
+            const rr=Math.sqrt((x1-ox)*(x1-ox)+(y1-oy)*(y1-oy));
+            const a1=Math.atan2(y1-oy,x1-ox), a2=Math.atan2(y2-oy,x2-ox);
+            let diff=a2-a1;
+            while(diff>Math.PI) diff-=Math.PI*2;
+            while(diff<-Math.PI) diff+=Math.PI*2;
+            ctx.beginPath(); ctx.arc(cx+ox*R,cy+oy*R,rr*R,a1,a2,diff<0);
+            ctx.strokeStyle=strokeColor; ctx.lineWidth=lineW; ctx.stroke();
         }
 
-        function draw() {
-            background(250);
-            
-            // Lighting
-            ambientLight(100);
-            directionalLight(255, 255, 255, -1, 0.5, -1);
-            pointLight(200, 200, 200, 100, -100, 100);
-            
-            // Auto-rotation when not interacting
-            if (!mouseInteracting) {
-                rotationX += 0.005;
-                rotationY += 0.008;
+        const P=5, Q=4;
+        const TILE_R=Math.sqrt(Math.cos(Math.PI/P+Math.PI/Q)/Math.cos(Math.PI/P-Math.PI/Q));
+
+        function tileVertices(center, rotAngle) {
+            const [cx_t,cy_t]=center, verts=[];
+            for(let k=0;k<P;k++){
+                const a=rotAngle+(2*Math.PI*k/P)+Math.PI/P;
+                verts.push(mobius([TILE_R*Math.cos(a),TILE_R*Math.sin(a)],[-cx_t,-cy_t]));
             }
-            
-            // Automatic solid switching every 4 seconds
-            if (millis() - lastSwitchTime > 4000) {
-                currentSolid = (currentSolid + 1) % solids.length;
-                lastSwitchTime = millis();
-            }
-            
-            push();
-            rotateX(rotationX);
-            rotateY(rotationY);
-            
-            // Set material properties
-            fill(100, 100, 100);
-            stroke(50);
-            strokeWeight(1);
-            
-            // Draw current solid
-            switch(solids[currentSolid]) {
-                case 'tetrahedron':
-                    drawTetrahedron();
-                    break;
-                case 'cube':
-                    box(120);
-                    break;
-                case 'octahedron':
-                    drawOctahedron();
-                    break;
-                case 'dodecahedron':
-                    drawDodecahedron();
-                    break;
-                case 'icosahedron':
-                    drawIcosahedron();
-                    break;
-            }
-            pop();
-            
-            // Display solid name
-            push();
-            fill(50);
-            textAlign(CENTER);
-            textSize(16);
-            textFont('Inter, sans-serif');
-            text(solidNames[currentSolid], 0, height/2 - 30);
-            pop();
+            return verts;
         }
-        
-        function drawTetrahedron() {
-            let h = 120;
-            beginShape(TRIANGLES);
-            // Front face
-            vertex(0, -h/2, h/4);
-            vertex(-h/2, h/2, -h/4);
-            vertex(h/2, h/2, -h/4);
-            
-            // Right face
-            vertex(0, -h/2, h/4);
-            vertex(h/2, h/2, -h/4);
-            vertex(0, h/2, h/2);
-            
-            // Left face
-            vertex(0, -h/2, h/4);
-            vertex(0, h/2, h/2);
-            vertex(-h/2, h/2, -h/4);
-            
-            // Bottom face
-            vertex(-h/2, h/2, -h/4);
-            vertex(0, h/2, h/2);
-            vertex(h/2, h/2, -h/4);
-            endShape();
+
+        function drawTile(center,rotAngle,color,alpha,lw){
+            const verts=tileVertices(center,rotAngle);
+            ctx.save(); ctx.globalAlpha=alpha;
+            for(let i=0;i<P;i++) drawGeodesic(verts[i],verts[(i+1)%P],color,lw);
+            ctx.restore();
         }
-        
-        function drawOctahedron() {
-            let r = 80;
-            beginShape(TRIANGLES);
-            // Top pyramid
-            for (let i = 0; i < 4; i++) {
-                let angle1 = (i * PI) / 2;
-                let angle2 = ((i + 1) * PI) / 2;
-                vertex(0, -r, 0);
-                vertex(r * cos(angle1), 0, r * sin(angle1));
-                vertex(r * cos(angle2), 0, r * sin(angle2));
-            }
-            // Bottom pyramid
-            for (let i = 0; i < 4; i++) {
-                let angle1 = (i * PI) / 2;
-                let angle2 = ((i + 1) * PI) / 2;
-                vertex(0, r, 0);
-                vertex(r * cos(angle2), 0, r * sin(angle2));
-                vertex(r * cos(angle1), 0, r * sin(angle1));
-            }
-            endShape();
-        }
-        
-        function drawDodecahedron() {
-            // Simplified dodecahedron approximation
-            let r = 70;
-            for (let i = 0; i < 12; i++) {
-                push();
-                let phi = (1 + sqrt(5)) / 2;
-                rotateY((i * TWO_PI) / 12);
-                rotateX(PI / 6);
-                translate(0, 0, r);
-                rotateZ(i * 0.5);
-                beginShape();
-                for (let j = 0; j < 5; j++) {
-                    let angle = (j * TWO_PI) / 5;
-                    vertex(20 * cos(angle), 20 * sin(angle), 0);
-                }
-                endShape(CLOSE);
-                pop();
-            }
-        }
-        
-        function drawIcosahedron() {
-            // Simplified icosahedron using triangular faces
-            let r = 80;
-            let phi = (1 + sqrt(5)) / 2;
-            
-            // Create vertices
-            let vertices = [];
-            vertices.push([0, 1, phi]);
-            vertices.push([0, -1, phi]);
-            vertices.push([0, 1, -phi]);
-            vertices.push([0, -1, -phi]);
-            vertices.push([1, phi, 0]);
-            vertices.push([-1, phi, 0]);
-            vertices.push([1, -phi, 0]);
-            vertices.push([-1, -phi, 0]);
-            vertices.push([phi, 0, 1]);
-            vertices.push([-phi, 0, 1]);
-            vertices.push([phi, 0, -1]);
-            vertices.push([-phi, 0, -1]);
-            
-            // Scale vertices
-            for (let i = 0; i < vertices.length; i++) {
-                for (let j = 0; j < 3; j++) {
-                    vertices[i][j] *= r / 2;
+
+        const STEP=2*TILE_R/(1+TILE_R*TILE_R);
+
+        function generateTiles(depth){
+            const seen=new Map(), EPS=1e-4;
+            const key=([x,y])=>`${Math.round(x/EPS)},${Math.round(y/EPS)}`;
+            const tiles=[], queue=[{c:[0,0],rot:0,d:0}];
+            seen.set(key([0,0]),true);
+            while(queue.length){
+                const{c,rot,d}=queue.shift();
+                tiles.push({c,rot});
+                if(d>=depth) continue;
+                for(let k=0;k<P;k++){
+                    const edgeAngle=rot+(2*Math.PI*k/P)+Math.PI/P;
+                    const dir=[Math.cos(edgeAngle),Math.sin(edgeAngle)];
+                    const nc=mobius(scale(dir,STEP),scale(c,-1));
+                    if(mod2(nc)>=0.97) continue;
+                    const k2=key(nc);
+                    if(!seen.has(k2)){ seen.set(k2,true); queue.push({c:nc,rot:edgeAngle+Math.PI-Math.PI/P,d:d+1}); }
                 }
             }
-            
-            // Draw some triangular faces (simplified)
-            beginShape(TRIANGLES);
-            let faces = [
-                [0, 1, 8], [0, 8, 4], [0, 4, 5], [0, 5, 9], [0, 9, 1],
-                [3, 2, 10], [3, 10, 6], [3, 6, 7], [3, 7, 11], [3, 11, 2]
-            ];
-            
-            for (let face of faces) {
-                for (let i of face) {
-                    vertex(vertices[i][0], vertices[i][1], vertices[i][2]);
-                }
-            }
-            endShape();
+            return tiles;
         }
-        
-        function mouseDragged() {
-            if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-                mouseInteracting = true;
-                rotationY += (mouseX - pmouseX) * 0.01;
-                rotationX += (mouseY - pmouseY) * 0.01;
-                setTimeout(() => {
-                    mouseInteracting = false;
-                }, 2000);
-            }
+
+        const TILES=generateTiles(4);
+
+        function init(){
+            canvas.width=canvas.offsetWidth; canvas.height=canvas.offsetHeight;
+            W=canvas.width; H=canvas.height;
+            R=Math.min(W,H)*0.47; cx=W/2; cy=H/2;
         }
-        
-        function mousePressed() {
-            if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-                // Manual solid switching on click
-                currentSolid = (currentSolid + 1) % solids.length;
-                lastSwitchTime = millis();
-            }
+
+        function frame(){
+            t+=0.004;
+            ctx.clearRect(0,0,W,H);
+            ctx.fillStyle='#0a0a0f'; ctx.fillRect(0,0,W,H);
+            ctx.save(); ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+            TILES.forEach(({c,rot})=>{
+                const dist=Math.sqrt(mod2(c));
+                const alpha=Math.pow(1-dist,1.4)*0.6;
+                if(alpha<0.03) return;
+                const r_v=Math.round(110+(167-110)*dist), g_v=Math.round(231+(139-231)*dist), b_v=Math.round(247+(250-247)*dist);
+                drawTile(diskRotate(c,t*0.12),rot+t*0.12,`rgb(${r_v},${g_v},${b_v})`,alpha,(1-dist)*1.2+0.3);
+            });
+            ctx.restore();
+            ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2);
+            ctx.strokeStyle='rgba(110,231,247,0.12)'; ctx.lineWidth=1; ctx.stroke();
+            const grad=ctx.createRadialGradient(cx,cy,R*0.6,cx,cy,R);
+            grad.addColorStop(0,'rgba(10,10,15,0)'); grad.addColorStop(1,'rgba(10,10,15,0.75)');
+            ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill();
+            requestAnimationFrame(frame);
         }
+
+        window.addEventListener('resize',init); init(); frame();
+    })();
+
+    function updateTime(){
+        const el=document.getElementById('current-time');
+        if(!el) return;
+        el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});
+    }
+    updateTime(); setInterval(updateTime,60000);
     </script>
 </body>
 </html>

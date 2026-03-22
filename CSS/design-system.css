@@ -1,0 +1,306 @@
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — Jonnathan Ospina Portfolio
+   Single source of truth for all shared styles across pages.
+   Page-specific rules live in each HTML file's <style> block.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── TOKENS ── */
+:root {
+    --bg:       #0a0a0f;
+    --surface:  #111118;
+    --elevated: #1a1a24;
+    --accent:   #6ee7f7;
+    --accent2:  #a78bfa;
+    --text:     #f0f0f5;
+    --muted:    #6b7280;
+    --border:   rgba(110, 231, 247, 0.1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── BASE ── */
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ── BACKGROUND CANVAS (shared by subpages) ── */
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── NAVIGATION ── */
+.nav-container {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: var(--muted);
+    padding: 0.4rem 1rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+}
+
+.nav-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* ── LANG SWITCHER ── */
+.lang-switcher {
+    display: flex;
+    gap: 0;
+    margin-left: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.35rem 0.65rem;
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+}
+
+.lang-btn:last-child { border-right: none; }
+
+.lang-btn:hover { color: var(--text); background: var(--surface); }
+
+.lang-btn.active {
+    color: var(--accent);
+    background: rgba(110, 231, 247, 0.07);
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: rgba(110, 231, 247, 0.08);
+    box-shadow: 0 0 28px rgba(110, 231, 247, 0.15);
+}
+
+.btn-ghost {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    display: inline-block;
+}
+
+.btn-ghost:hover {
+    border-color: var(--muted);
+    color: var(--text);
+}
+
+/* ── PAGE HEADER (subpages) ── */
+.page-header {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.8rem;
+}
+
+.page-header h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+.page-header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+}
+
+/* ── STATUS BAR ── */
+.status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(17, 17, 24, 0.97);
+    border-top: 1px solid var(--border);
+    padding: 0.45rem 1.5rem;
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: #34d399;
+    border-radius: 50%;
+    animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* ── FOOTER ── */
+.footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 2.5rem 2rem 4rem;
+    color: var(--muted);
+    position: relative;
+    z-index: 10;
+}
+
+.footer a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover { color: var(--accent); }
+
+.footer-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    margin-top: 0.8rem;
+    opacity: 0.4;
+    letter-spacing: 0.06em;
+}
+
+/* ── CARD ACCENT BAR (shared hover effect) ── */
+.skill-card,
+.experience-item,
+.education-item,
+.project-card,
+.blog-post {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before,
+.experience-item::before,
+.education-item::before,
+.project-card::before,
+.blog-post::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    transition: height 0.3s ease;
+}
+
+.skill-card::before   { background: var(--accent); }
+.experience-item::before,
+.education-item::before { background: var(--accent); }
+.project-card::before { background: var(--accent2); }
+.blog-post::before    { background: var(--accent2); }
+
+.skill-card:hover::before,
+.experience-item:hover::before,
+.education-item:hover::before,
+.project-card:hover::before,
+.blog-post:hover::before { height: 100%; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .navbar { padding: 1rem 1.5rem; }
+    .nav-logo { display: none; }
+}

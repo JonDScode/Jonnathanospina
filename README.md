@@ -1,62 +1,55 @@
-# Jonnathan Ospina - Modern Portfolio Website
+# Jonnathan Ospina — Portfolio
 
-A modern, minimalist portfolio website featuring geometric fractals and clean design.
+A personal portfolio website with a dark mathematical theme and non-Euclidean geometry animations.
 
-## 🎨 Design Features
-- **Modern Aesthetic**: Clean, professional design with subtle animations
-- **Geometric Fractals**: Interactive canvas backgrounds with mathematical patterns
-- **Responsive Design**: Optimized for all devices and screen sizes
-- **Color Scheme**: Sophisticated grayscale palette (whites, grays, blacks)
-- **Typography**: Inter font family for excellent readability
+## Design System
 
-## 🔧 Technical Stack
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Canvas API**: Custom geometric renderers for each page
-- **Responsive**: Mobile-first design approach
-- **Performance**: Optimized animations and efficient rendering
+- **Theme**: Dark — `#0a0a0f` base, cyan (`#6ee7f7`) and violet (`#a78bfa`) accents
+- **Typography**: Inter (body) + JetBrains Mono (code, labels, nav)
+- **Animations**: Vanilla JS Canvas API — no external animation libraries
 
-## 📁 Project Structure
+## Project Structure
+
 ```
 Jonnathanospina/
-├── assets/
-│   └── image (2).png
 ├── CSS/
-│   ├── reset.css
-│   └── styles.css
+│   └── design-system.css   # Shared tokens, reset, nav, status bar, buttons, footer
 ├── pages/
-│   ├── blog.html      # Blog with wave patterns
-│   ├── cv.html        # CV with hexagonal patterns  
-│   └── projects.html  # Projects with circular patterns
+│   ├── cv.html             # CV — vector field background (Perlin flow)
+│   ├── projects.html       # Projects — vector field background
+│   └── blog.html           # Blog — Rule 30 cellular automaton background
+├── index.html              # Home — hyperbolic mosaic (Poincare disk)
+├── CNAME
 ├── .gitignore
-├── index.html         # Home with fractal patterns
 └── README.md
 ```
 
-## ✨ Interactive Features
-- **Fractal Animations**: Each page has unique geometric patterns
-- **Smooth Navigation**: Seamless transitions between pages
-- **Hover Effects**: Subtle animations on interactive elements
-- **Real-time Clock**: Status bar with current time
-- **Parallax Scrolling**: Gentle parallax effect on backgrounds
+## Animations
 
-## 🚀 Getting Started
+| Page | Animation | Math |
+|------|-----------|------|
+| `index.html` | Hyperbolic mosaic | Poincare disk model, {5,4} tiling, Mobius transforms `T_a(z) = (z-a)/(1-az)` |
+| `cv.html` | Vector field | Perlin-like noise flow, `angle = noise(x,y,t) * 4pi` |
+| `projects.html` | Vector field | Same as CV, violet palette |
+| `blog.html` | Rule 30 automaton | Wolfram elementary CA, `k=3, r=1` |
+
+## CSS Architecture
+
+All shared styles live in a single file:
+
+```
+CSS/design-system.css   — design tokens, reset, nav, status bar, buttons, footer, card effects
+```
+
+Each HTML file has only a small inline `<style>` block for its own layout (hero, grid, card sizes, etc.).
+No external legacy stylesheets are loaded.
+
+## Getting Started
+
 1. Clone the repository
-2. Open `index.html` in your browser
-3. Navigate through the pages to see different geometric patterns
+2. Open `index.html` in a browser (or use Live Server on port 5501)
+3. Navigate through the pages
 
-## 📱 Responsive Breakpoints
-- **Desktop**: 1200px and above
-- **Tablet**: 768px - 1199px  
-- **Mobile**: Below 768px
+## Contact
 
-## 🎯 Page-Specific Features
-- **Home**: Sierpinski triangles and Koch snowflakes
-- **CV**: Hexagonal grid with professional experience
-- **Projects**: Circular patterns showcasing work samples
-- **Blog**: Wave patterns for upcoming content
-
-## 📞 Contact
 - **Email**: jonnathanospinam@gmail.com
-- **Portfolio**: This website!
-
-*Building the future, one algorithm at a time* ⚡

@@ -4,457 +4,319 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonnathan Ospina - CV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/design-system.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Geometric Canvas Background */
-        #geometric-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        /* Navigation */
-        .nav-container {
-            position: relative;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e9ecef;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            padding: 1.5rem;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: 2px solid #6c757d;
-            color: #495057;
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-btn:hover {
-            background: #343a40;
-            color: white;
-            border-color: #343a40;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(52, 58, 64, 0.3);
-        }
-
-        .nav-btn.active {
-            background: #212529;
-            color: white;
-            border-color: #212529;
-        }
-
-        /* CV Container */
+        /* ── CV CONTAINER ── */
         .cv-container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 7rem 2rem 5rem;
             position: relative;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            min-height: 100vh;
         }
 
+        /* ── CV HEADER ── */
         .cv-header {
-            text-align: center;
             margin-bottom: 4rem;
-            padding: 3rem 0;
-            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border);
         }
-
-        .cv-header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #212529;
+        .cv-header-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
             margin-bottom: 1rem;
-            letter-spacing: -0.02em;
         }
-
+        .cv-header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
         .cv-header .subtitle {
-            font-size: 1.3rem;
-            color: #6c757d;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--muted);
             margin-bottom: 2rem;
-            font-weight: 400;
+            letter-spacing: 0.04em;
         }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
+        .contact-info { display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
         .contact-item {
-            color: #495057;
-            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
         }
+        .contact-item a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        .contact-item a:hover { opacity: 0.7; }
 
-        .contact-item a {
-            color: #212529;
+        /* ── DOWNLOAD BUTTON ── */
+        .cv-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(110, 231, 247, 0.35);
+            padding: 0.5rem 1.1rem;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            background: transparent;
+            cursor: pointer;
+            margin-top: 1.8rem;
+        }
+        .cv-download-btn:hover {
+            background: rgba(110, 231, 247, 0.08);
+            border-color: rgba(110, 231, 247, 0.7);
+            color: var(--text);
+        }
+        .cv-download-btn svg {
+            width: 13px;
+            height: 13px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
-        .contact-item a:hover {
-            color: #6c757d;
+        @media print {
+            .nav-container, .status-bar, #bg-canvas, .cv-download-btn { display: none !important; }
+            body { background: #fff !important; }
+            .cv-container { padding: 2rem !important; }
+            * { color: #111 !important; border-color: #ccc !important; background: transparent !important; }
+            .summary-text, .experience-item, .education-item, .skill-category, .language-item { border: 1px solid #ccc !important; }
         }
 
-        /* CV Sections */
-        .cv-section {
-            margin-bottom: 4rem;
-        }
-
+        /* ── SECTIONS ── */
+        .cv-section { margin-bottom: 3.5rem; }
         .cv-section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e9ecef;
-            position: relative;
+            font-size: 0.7rem;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .cv-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 60px;
-            height: 2px;
-            background: #495057;
-        }
-
-        /* Experience/Education Items */
+        /* ── EXPERIENCE / EDUCATION ── */
         .experience-item, .education-item {
-            margin-bottom: 2.5rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 1.5rem;
+            padding: 1.8rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: border-color 0.25s, background 0.25s;
         }
-
-        .experience-item::before, .education-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.03), transparent);
-            transition: all 0.6s ease;
-        }
-
-        .experience-item:hover::before, .education-item:hover::before {
-            left: 100%;
-        }
-
         .experience-item:hover, .education-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            border-color: #adb5bd;
+            background: var(--elevated);
+            border-color: rgba(110, 231, 247, 0.2);
         }
-
         .item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.5rem;
         }
-
-        .item-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #212529;
-        }
-
-        .item-company {
-            font-size: 1.1rem;
-            color: #495057;
-            font-weight: 500;
-        }
-
+        .item-title { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+        .item-company { font-size: 0.88rem; color: var(--muted); margin-top: 0.2rem; }
         .item-period {
-            color: #6c757d;
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            opacity: 0.6;
+            white-space: nowrap;
         }
+        .item-description { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+        .item-description ul { margin-top: 0.8rem; padding-left: 1.2rem; }
+        .item-description li { margin-bottom: 0.4rem; }
 
-        .item-description {
-            color: #495057;
-            margin-top: 1rem;
-            line-height: 1.7;
-        }
-
-        .item-description ul {
-            margin-top: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        .item-description li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Skills Grid */
+        /* ── SKILLS ── */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            background: var(--border);
+            border: 1px solid var(--border);
         }
-
         .skill-category {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid #e9ecef;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            background: var(--surface);
+            padding: 1.5rem 1.8rem;
+            transition: background 0.2s;
+            border: 1px solid var(--border);
+            margin: -1px 0 0 -1px;
         }
-
-        .skill-category:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        }
-
+        .skill-category:hover { background: var(--elevated); }
         .skill-category h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 1.5rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .skill-tag {
-            background: #f8f9fa;
-            color: #495057;
-            padding: 0.5rem 1rem;
-            border: 1px solid #e9ecef;
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 1.2rem;
         }
-
-        .skill-tag:hover {
-            background: #e9ecef;
-            border-color: #adb5bd;
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag {
+            background: var(--elevated);
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.7rem;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s;
         }
+        .skill-tag:hover { color: var(--accent); border-color: rgba(110, 231, 247, 0.3); }
 
-        /* Languages */
+        /* ── LANGUAGES ── */
         .languages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
         }
-
         .language-item {
-            text-align: center;
+            background: var(--surface);
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .language-item:hover { background: var(--elevated); }
+        .language-name { font-weight: 600; color: var(--text); margin-bottom: 0.3rem; font-size: 0.95rem; }
+        .language-level { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+
+        /* ── SUMMARY ── */
+        .summary-text {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            text-align: justify;
+            padding: 1.8rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
         }
 
-        .language-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .language-name {
-            font-weight: 600;
-            color: #212529;
-            margin-bottom: 0.5rem;
-        }
-
-        .language-level {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        /* Back Button */
-        .back-button {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: #495057;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 2px solid #6c757d;
-            padding: 0.8rem 2rem;
-            background: transparent;
-        }
-
-        .back-button:hover {
-            background: #343a40;
-            color: white;
-            border-color: #343a40;
-            transform: translateY(-2px);
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .cv-header h1 { font-size: 2.5rem; }
-            .cv-header .subtitle { font-size: 1.1rem; }
-            .contact-info { gap: 1.5rem; flex-direction: column; align-items: center; }
-            .item-header { flex-direction: column; align-items: flex-start; }
-            .cv-container { padding: 2rem 1rem; }
-            .navbar { flex-wrap: wrap; gap: 1rem; padding: 1rem; }
-            .nav-btn { padding: 0.6rem 1.5rem; font-size: 0.8rem; }
+            .cv-container { padding: 6rem 1.2rem 4rem; }
+            .contact-info { flex-direction: column; gap: 0.8rem; }
+            .item-header { flex-direction: column; }
+            .skills-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Geometric Canvas Background -->
-    <canvas id="geometric-canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
     <!-- Navigation -->
     <header class="nav-container">
         <nav class="navbar">
-            <a href="../index.html" class="nav-btn">HOME</a>
-            <a href="cv.html" class="nav-btn active">CV</a>
-            <a href="projects.html" class="nav-btn">PROJECTS</a>
-            <a href="blog.html" class="nav-btn">BLOG</a>
+            <a href="../index.html" class="nav-logo">jonnathan.ospina</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-btn" data-i18n="nav.home">Inicio</a>
+                <a href="cv.html" class="nav-btn active" data-i18n="nav.cv">CV</a>
+                <a href="projects.html" class="nav-btn" data-i18n="nav.projects">Proyectos</a>
+                <a href="blog.html" class="nav-btn" data-i18n="nav.blog">Blog</a>
+            </div>
         </nav>
     </header>
 
     <main class="cv-container">
         <!-- CV Header -->
         <div class="cv-header">
-            <h1>Jonnathan Ospina</h1>
-            <p class="subtitle">Developer • AI Engineer • Data Scientist</p>
+            <div class="cv-header-label" data-i18n="cv.label">// curriculum_vitae</div>
+            <h1>Jonnathan Ospina Montalvo</h1>
+            <p class="subtitle" data-i18n="cv.subtitle">AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agentes</p>
             <div class="contact-info">
+                <div class="contact-item" data-i18n="cv.location">Madrid, España</div>
                 <div class="contact-item">
-                    <strong>Email:</strong> <a href="mailto:jonnathanospinam@gmail.com">jonnathanospinam@gmail.com</a>
+                    <a href="mailto:jonnathanospinam@gmail.com">jonnathanospinam@gmail.com</a>
                 </div>
                 <div class="contact-item">
-                    <strong>Location:</strong> Available Worldwide
+                    <a href="https://www.linkedin.com/in/jonnathanospinam" target="_blank">LinkedIn</a>
                 </div>
                 <div class="contact-item">
-                    <strong>LinkedIn:</strong> <a href="#">/in/jonmontalvo</a>
+                    <a href="https://github.com/Jonnathanospina" target="_blank">GitHub</a>
                 </div>
             </div>
+            <a href="../assets/cv-jonnathan-ospina.pdf" download class="cv-download-btn">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span data-i18n="cv.download">Descargar PDF</span>
+            </a>
         </div>
 
         <!-- Professional Summary -->
         <section class="cv-section">
-            <h2>Professional Summary</h2>
-            <p style="color: #495057; font-size: 1.1rem; line-height: 1.7; text-align: justify;">
-                International Trade Professional with a passion for Software Development, Data Science, and Artificial Intelligence, 
-                with specialized focus on finance and economics. My experience spans from full-stack development to implementing 
-                Machine Learning and AI solutions. I combine business acumen with technical expertise to create innovative solutions 
-                that drive meaningful results.
+            <h2 data-i18n="cv.s.profile">// perfil_profesional</h2>
+            <p class="summary-text" data-i18n="cv.summary">
+                Científico de Datos e Ingeniero de IA especializado en el diseño e implementación de soluciones basadas en LLMs y sistemas de agentes.
+                Experto en la construcción de pipelines de datos y la industrialización de modelos de Machine Learning bajo un enfoque de IA Responsable y ética.
+                Certificaciones avanzadas en Azure AI y sólida base en programación orientada a objetos —
+                combinando excelencia técnica con visión estratégica de negocio y procesos de innovación tecnológica.
             </p>
         </section>
 
         <!-- Technical Skills -->
         <section class="cv-section">
-            <h2>Technical Skills</h2>
+            <h2 data-i18n="cv.s.skills">// habilidades_técnicas</h2>
             <div class="skills-container">
                 <div class="skill-category">
-                    <h3>Machine Learning & AI</h3>
+                    <h3 data-i18n="cv.sk.lang">Lenguajes &amp; Herramientas</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Python (Avanzado)</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">SCRUM</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="cv.sk.genai">IA Generativa</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Prompt Flows</span>
+                        <span class="skill-tag">LLM Architectures</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">Embeddings</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">Hugging Face</span>
+                        <span class="skill-tag">Agentes IA</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="cv.sk.azure">Cloud &amp; Data — Azure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Azure AI Services</span>
+                        <span class="skill-tag">Azure Search</span>
+                        <span class="skill-tag">Feature Engineering</span>
+                        <span class="skill-tag">Model Evaluation</span>
+                        <span class="skill-tag">Precisión / Latencia</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-i18n="cv.sk.ml">ML &amp; Data Science</h3>
+                    <div class="skill-tags">
                         <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">TensorFlow</span>
                         <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">Spacy</span>
-                        <span class="skill-tag">Scipy</span>
                         <span class="skill-tag">Pandas</span>
                         <span class="skill-tag">NumPy</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Backend Development</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Spring Boot</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">FastAPI</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Express</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Frontend Development</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React.js</span>
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">Bootstrap</span>
-                        <span class="skill-tag">Sass</span>
-                        <span class="skill-tag">TypeScript</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Data Visualization</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Matplotlib</span>
-                        <span class="skill-tag">Plotly</span>
-                        <span class="skill-tag">Seaborn</span>
                         <span class="skill-tag">Streamlit</span>
-                        <span class="skill-tag">Dash</span>
-                        <span class="skill-tag">D3.js</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">GitHub</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">Plotly</span>
+                        <span class="skill-tag">Pipelines ML</span>
                     </div>
                 </div>
             </div>
@@ -462,23 +324,22 @@
 
         <!-- Professional Experience -->
         <section class="cv-section">
-            <h2>Professional Experience</h2>
-            
+            <h2 data-i18n="cv.s.exp">// experiencia_profesional</h2>
+
             <div class="experience-item">
                 <div class="item-header">
                     <div>
-                        <h3 class="item-title">Full-Stack Developer & Data Scientist</h3>
-                        <p class="item-company">Freelance & Personal Projects</p>
+                        <h3 class="item-title" data-i18n="cv.exp1.title">Científico de Datos — Especialista en IA</h3>
+                        <p class="item-company" data-i18n="cv.exp1.company">Factoría F5 &nbsp;·&nbsp; Madrid</p>
                     </div>
-                    <span class="item-period">2023 - Present</span>
+                    <span class="item-period" data-i18n="cv.exp1.period">2023 - Presente</span>
                 </div>
                 <div class="item-description">
-                    <p>Development of complete web applications using modern technologies with focus on scalable architectures and data-driven solutions.</p>
                     <ul>
-                        <li>Implemented Machine Learning models for predictive analysis in financial data</li>
-                        <li>Developed automated data pipelines and interactive visualizations for business insights</li>
-                        <li>Built full-stack applications using React.js, Node.js, and Python frameworks</li>
-                        <li>Deployed applications using Docker and cloud services (AWS)</li>
+                        <li data-i18n="cv.exp1.b1"><strong>Desarrollo de Soluciones GenAI:</strong> Diseño y validación de arquitecturas basadas en LLMs y Deep Learning para proyectos de impacto social y eficiencia operativa.</li>
+                        <li data-i18n="cv.exp1.b2"><strong>Implementación de Pipelines:</strong> Construcción de flujos de trabajo para la ingesta y transformación de datos, asegurando la calidad y trazabilidad de los modelos.</li>
+                        <li data-i18n="cv.exp1.b3"><strong>Formación Técnica Avanzada:</strong> Trainer en el Bootcamp de IA School, liderando módulos de IA Generativa, integración de APIs y desarrollo de software robusto.</li>
+                        <li data-i18n="cv.exp1.b4"><strong>Consultoría Tecnológica:</strong> Colaboración con administraciones públicas (Ayuntamientos, UE) en la definición de métricas de éxito y despliegue de soluciones de innovación.</li>
                     </ul>
                 </div>
             </div>
@@ -486,18 +347,14 @@
             <div class="experience-item">
                 <div class="item-header">
                     <div>
-                        <h3 class="item-title">AI/ML Research & Development</h3>
-                        <p class="item-company">Independent Research</p>
+                        <h3 class="item-title" data-i18n="cv.exp2.title">Desarrollador de Software &amp; Frontend</h3>
+                        <p class="item-company" data-i18n="cv.exp2.company">Freelance &nbsp;·&nbsp; Madrid</p>
                     </div>
-                    <span class="item-period">2022 - Present</span>
+                    <span class="item-period">2022 - 2023</span>
                 </div>
                 <div class="item-description">
-                    <p>Research and development of artificial intelligence solutions with focus on natural language processing and computer vision.</p>
                     <ul>
-                        <li>Developed NLP models for text analysis and sentiment classification</li>
-                        <li>Implemented computer vision solutions for image recognition tasks</li>
-                        <li>Created recommendation systems using collaborative filtering techniques</li>
-                        <li>Published research findings and maintained active open-source contributions</li>
+                        <li data-i18n="cv.exp2.b1"><strong>Desarrollo Web &amp; Demos:</strong> Creación de sitios e-commerce y aplicaciones web, con enfoque en Frontend Developer para la visualización de soluciones digitales.</li>
                     </ul>
                 </div>
             </div>
@@ -505,18 +362,14 @@
             <div class="experience-item">
                 <div class="item-header">
                     <div>
-                        <h3 class="item-title">International Trade Professional</h3>
-                        <p class="item-company">Commercial Sector</p>
+                        <h3 class="item-title" data-i18n="cv.exp3.title">Profesor Universitario</h3>
+                        <p class="item-company" data-i18n="cv.exp3.company">Universidad Autónoma de Occidente &nbsp;·&nbsp; Colombia</p>
                     </div>
-                    <span class="item-period">2020 - 2023</span>
+                    <span class="item-period">2017 - 2021</span>
                 </div>
                 <div class="item-description">
-                    <p>Professional experience in international commerce providing unique perspective for developing technological solutions in finance and global economics.</p>
                     <ul>
-                        <li>Analyzed global market trends and economic indicators</li>
-                        <li>Managed international business relationships and negotiations</li>
-                        <li>Developed data analysis tools for market research and forecasting</li>
-                        <li>Automated reporting processes using Python and Excel integration</li>
+                        <li data-i18n="cv.exp3.b1"><strong>Análisis y Estructuración:</strong> Liderazgo académico en áreas de mercadeo y legislación, desarrollando una fuerte capacidad analítica para la resolución de problemas complejos y documentación técnica.</li>
                     </ul>
                 </div>
             </div>
@@ -524,50 +377,104 @@
 
         <!-- Education -->
         <section class="cv-section">
-            <h2>Education</h2>
-            
+            <h2 data-i18n="cv.s.edu">// formación_académica_y_certificaciones</h2>
+
             <div class="education-item">
                 <div class="item-header">
                     <div>
-                        <h3 class="item-title">Professional in International Commerce</h3>
-                        <p class="item-company">Universidad Católica Luis Amigó</p>
+                        <h3 class="item-title" data-i18n="cv.edu.master.title">Máster en Inteligencia Artificial</h3>
+                        <p class="item-company">Universidad Internacional de La Rioja (UNIR)</p>
                     </div>
-                    <span class="item-period">2018 - 2022</span>
-                </div>
-                <div class="item-description">
-                    <p>Comprehensive education in international trade, economics, and business administration with focus on global markets and financial analysis.</p>
+                    <span class="item-period">2024 - 2025</span>
                 </div>
             </div>
 
             <div class="education-item">
                 <div class="item-header">
                     <div>
-                        <h3 class="item-title">Self-Directed Learning in Technology</h3>
-                        <p class="item-company">Online Platforms & Bootcamps</p>
+                        <h3 class="item-title" data-i18n="cv.edu.grado.title">Grado en Comercio Internacional</h3>
+                        <p class="item-company">Universidad Central del Valle del Cauca (UCEVA) &nbsp;·&nbsp; Colombia</p>
                     </div>
-                    <span class="item-period">2022 - Present</span>
+                    <span class="item-period">2010 - 2014</span>
                 </div>
-                <div class="item-description">
-                    <p>Continuous learning in software development, data science, and artificial intelligence through various online platforms and practical projects.</p>
+            </div>
+
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title" data-i18n="cv.edu.de.title">Curso Universitario Avanzado en Data Engineering</h3>
+                        <p class="item-company">UNIR</p>
+                    </div>
+                    <span class="item-period">2024</span>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title" data-i18n="cv.edu.ai102.title">Azure AI Engineer Associate (IA-102)</h3>
+                        <p class="item-company">Microsoft</p>
+                    </div>
+                    <span class="item-period" data-i18n="cv.edu.cert">Certificación</span>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title" data-i18n="cv.edu.aifund.title">Azure AI Fundamentals</h3>
+                        <p class="item-company">Microsoft</p>
+                    </div>
+                    <span class="item-period" data-i18n="cv.edu.cert">Certificación</span>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title" data-i18n="cv.edu.bootcamp.title">Bootcamp en Inteligencia Artificial</h3>
+                        <p class="item-company">Saturday IA</p>
+                    </div>
+                    <span class="item-period">2023</span>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title" data-i18n="cv.edu.java.title">Desarrollo de Software con Java</h3>
+                        <p class="item-company">Alura &nbsp;·&nbsp; Oracle</p>
+                    </div>
+                    <span class="item-period" data-i18n="cv.edu.cert">Certificación</span>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title" data-i18n="cv.edu.web.title">Técnico en Desarrollo Web</h3>
+                        <p class="item-company">Universidad Autónoma de Bucaramanga</p>
+                    </div>
+                    <span class="item-period" data-i18n="cv.edu.degree">Titulación</span>
                 </div>
             </div>
         </section>
 
         <!-- Languages -->
         <section class="cv-section">
-            <h2>Languages</h2>
+            <h2 data-i18n="cv.s.lang">// idiomas</h2>
             <div class="languages-grid">
                 <div class="language-item">
-                    <div class="language-name">Spanish</div>
-                    <div class="language-level">Native</div>
+                    <div class="language-name" data-i18n="cv.lang.es">Español</div>
+                    <div class="language-level" data-i18n="cv.lang.es.level">Nativo</div>
                 </div>
                 <div class="language-item">
-                    <div class="language-name">English</div>
-                    <div class="language-level">Professional Working Proficiency</div>
+                    <div class="language-name" data-i18n="cv.lang.en">Inglés</div>
+                    <div class="language-level" data-i18n="cv.lang.en.level">Avanzado</div>
                 </div>
                 <div class="language-item">
-                    <div class="language-name">Portuguese</div>
-                    <div class="language-level">Basic Conversational</div>
+                    <div class="language-name" data-i18n="cv.lang.pt">Portugués</div>
+                    <div class="language-level" data-i18n="cv.lang.pt.level">Intermedio</div>
                 </div>
             </div>
         </section>
@@ -577,168 +484,35 @@
     <div class="status-bar">
         <div class="status-item">
             <div class="status-dot"></div>
-            <span>CV MODE</span>
-        </div>
-        <div class="status-item">
-            <span>Version: 2025.1.0</span>
+            <span>online</span>
         </div>
         <div class="status-item">
             <span id="current-time"></span>
         </div>
     </div>
 
+    <script src="../JS/i18n.js"></script>
     <script>
-        // Geometric Canvas Background
-        class GeometricRenderer {
-            constructor(canvas) {
-                this.canvas = canvas;
-                this.ctx = canvas.getContext('2d');
-                this.time = 0;
-                this.mouseX = 0;
-                this.mouseY = 0;
-                
-                this.resize();
-                this.setupEventListeners();
-                this.animate();
-            }
-            
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-            
-            setupEventListeners() {
-                window.addEventListener('resize', () => this.resize());
-                window.addEventListener('mousemove', (e) => {
-                    this.mouseX = e.clientX / window.innerWidth;
-                    this.mouseY = e.clientY / window.innerHeight;
-                });
-            }
-            
-            drawHexagonalPattern() {
-                const hexSize = 30;
-                const hexHeight = hexSize * Math.sqrt(3);
-                const hexWidth = hexSize * 2;
-                
-                for (let row = 0; row < this.canvas.height / hexHeight + 2; row++) {
-                    for (let col = 0; col < this.canvas.width / (hexWidth * 0.75) + 2; col++) {
-                        const x = col * hexWidth * 0.75;
-                        const y = row * hexHeight + (col % 2) * hexHeight * 0.5;
-                        
-                        this.drawHexagon(x, y, hexSize, row, col);
-                    }
-                }
-            }
-            
-            drawHexagon(x, y, size, row, col) {
-                const time = this.time * 0.001;
-                const distance = Math.sqrt((x - this.canvas.width/2)**2 + (y - this.canvas.height/2)**2);
-                const wave = Math.sin(time + distance * 0.01);
-                const opacity = 0.05 + Math.abs(wave) * 0.05;
-                
-                this.ctx.beginPath();
-                for (let i = 0; i < 6; i++) {
-                    const angle = (i * Math.PI) / 3;
-                    const px = x + Math.cos(angle) * size;
-                    const py = y + Math.sin(angle) * size;
-                    
-                    if (i === 0) {
-                        this.ctx.moveTo(px, py);
-                    } else {
-                        this.ctx.lineTo(px, py);
-                    }
-                }
-                this.ctx.closePath();
-                
-                this.ctx.strokeStyle = `rgba(108, 117, 125, ${opacity})`;
-                this.ctx.lineWidth = 0.5;
-                this.ctx.stroke();
-            }
-            
-            drawConnectingLines() {
-                const numLines = 20;
-                for (let i = 0; i < numLines; i++) {
-                    const progress = i / numLines;
-                    const time = this.time * 0.002;
-                    
-                    const x1 = (Math.sin(time + progress * Math.PI * 2) * 0.3 + 0.5) * this.canvas.width;
-                    const y1 = (Math.cos(time + progress * Math.PI * 2) * 0.3 + 0.5) * this.canvas.height;
-                    const x2 = (Math.sin(time + progress * Math.PI * 2 + Math.PI) * 0.3 + 0.5) * this.canvas.width;
-                    const y2 = (Math.cos(time + progress * Math.PI * 2 + Math.PI) * 0.3 + 0.5) * this.canvas.height;
-                    
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(x1, y1);
-                    this.ctx.lineTo(x2, y2);
-                    
-                    const opacity = 0.1 + Math.sin(time + progress * Math.PI) * 0.05;
-                    this.ctx.strokeStyle = `rgba(73, 80, 87, ${opacity})`;
-                    this.ctx.lineWidth = 1;
-                    this.ctx.stroke();
-                }
-            }
-            
-            render() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                this.drawHexagonalPattern();
-                this.drawConnectingLines();
-            }
-            
-            animate() {
-                this.time = Date.now();
-                this.render();
-                requestAnimationFrame(() => this.animate());
-            }
+    /* ── Campo vectorial (fondo sutil) ── */
+    (function(){
+        const canvas=document.getElementById('bg-canvas');
+        const ctx=canvas.getContext('2d');
+        let W,H,particles=[],t=0;
+        const N=220,CELL=22;
+        function noise(x,y,z){return(Math.sin(x*1.3+z)*Math.cos(y*0.9-z*0.7)+Math.sin(x*2.1-z*1.1)*Math.cos(y*1.7+z*0.5))*0.5;}
+        function angle(x,y){return noise(x/CELL,y/CELL,t*0.00025)*Math.PI*4;}
+        class P{
+            constructor(){this.reset();}
+            reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.age=0;this.max=100+Math.random()*120;this.spd=0.7+Math.random()*1.1;this.px=this.x;this.py=this.y;}
+            step(){this.px=this.x;this.py=this.y;const a=angle(this.x,this.y);this.x+=Math.cos(a)*this.spd;this.y+=Math.sin(a)*this.spd;this.age++;if(this.age>this.max||this.x<0||this.x>W||this.y<0||this.y>H)this.reset();}
+            draw(){const al=Math.sin((this.age/this.max)*Math.PI)*0.25;ctx.beginPath();ctx.moveTo(this.px,this.py);ctx.lineTo(this.x,this.y);ctx.strokeStyle=`rgba(110,231,247,${al})`;ctx.lineWidth=0.7;ctx.stroke();}
         }
-        
-        // Update time in status bar
-        function updateTime() {
-            const timeElement = document.getElementById('current-time');
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('es-ES', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            timeElement.textContent = timeString;
-        }
-        
-        // Smooth scroll for internal links
-        function setupSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-        
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize geometric canvas
-            const canvas = document.getElementById('geometric-canvas');
-            new GeometricRenderer(canvas);
-            
-            // Setup interactions
-            setupSmoothScroll();
-            
-            // Update time immediately and then every minute
-            updateTime();
-            setInterval(updateTime, 60000);
-            
-            // Add subtle parallax effect
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const canvas = document.getElementById('geometric-canvas');
-                canvas.style.transform = `translateY(${scrolled * 0.05}px)`;
-            });
-        });
+        function init(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;W=canvas.width;H=canvas.height;particles=Array.from({length:N},()=>new P());}
+        function frame(){t++;ctx.fillStyle='rgba(10,10,15,0.25)';ctx.fillRect(0,0,W,H);particles.forEach(p=>{p.step();p.draw();});requestAnimationFrame(frame);}
+        window.addEventListener('resize',init);init();frame();
+    })();
+    function updateTime(){const el=document.getElementById('current-time');if(el)el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});}
+    updateTime();setInterval(updateTime,60000);
     </script>
 </body>
 </html>
