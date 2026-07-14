@@ -168,6 +168,60 @@ const TRANSLATIONS = {
     fr: 'Une sélection de travaux de développement et de recherche',
   },
 
+  /* ── PROJECTS — cards ── */
+  'projects.private': {
+    es:'// código privado', en:'// private code', pt:'// código privado', fr:'// code privé',
+  },
+
+  'projects.p1.type': { es:'Data Science · Analítica Deportiva', en:'Data Science · Sports Analytics', pt:'Data Science · Análise Desportiva', fr:'Data Science · Analytique Sportive' },
+  'projects.p1.desc': {
+    es: 'Laboratorio de ciencia de datos aplicada al fútbol: modelos de goles esperados (xG), forecasting de resultados (Poisson / Dixon-Coles), redes de pases y scouting de jugadores sobre event data profesional.',
+    en: 'Data science lab applied to football: expected goals (xG) models, match forecasting (Poisson / Dixon-Coles), passing networks and player scouting on professional event data.',
+    pt: 'Laboratório de ciência de dados aplicada ao futebol: modelos de golos esperados (xG), previsão de resultados (Poisson / Dixon-Coles), redes de passes e scouting de jogadores sobre event data profissional.',
+    fr: 'Laboratoire de data science appliquée au football : modèles d\'expected goals (xG), prévision de résultats (Poisson / Dixon-Coles), réseaux de passes et scouting de joueurs sur des event data professionnelles.',
+  },
+
+  'projects.p2.type': { es:'GenAI · Agentes', en:'GenAI · Agents', pt:'GenAI · Agentes', fr:'GenAI · Agents' },
+  'projects.p2.desc': {
+    es: 'Tutor agéntico de inglés: agente conversacional construido sobre Claude con voz híbrida (STT/TTS) y app universal iOS / Android / web. Monorepo TypeScript con arquitectura de agentes.',
+    en: 'Agentic English tutor: conversational agent built on Claude with hybrid voice (STT/TTS) and a universal iOS / Android / web app. TypeScript monorepo with agent architecture.',
+    pt: 'Tutor agêntico de inglês: agente conversacional construído sobre o Claude com voz híbrida (STT/TTS) e app universal iOS / Android / web. Monorepo TypeScript com arquitetura de agentes.',
+    fr: 'Tuteur agentique d\'anglais : agent conversationnel construit sur Claude avec voix hybride (STT/TTS) et app universelle iOS / Android / web. Monorepo TypeScript avec architecture d\'agents.',
+  },
+
+  'projects.p3.type': { es:'Data Engineering · Open Data', en:'Data Engineering · Open Data', pt:'Data Engineering · Open Data', fr:'Data Engineering · Open Data' },
+  'projects.p3.desc': {
+    es: 'Librería Python para acceso ágil a datos espaciales y estadísticos de Andalucía: mapas de municipios vía WFS y estadísticas del SIMA en tres líneas de código, con visualización interactiva.',
+    en: 'Python library for quick access to spatial and statistical data of Andalusia: municipality maps via WFS and SIMA statistics in three lines of code, with interactive visualization.',
+    pt: 'Biblioteca Python para acesso ágil a dados espaciais e estatísticos da Andaluzia: mapas de municípios via WFS e estatísticas do SIMA em três linhas de código, com visualização interativa.',
+    fr: 'Bibliothèque Python pour un accès rapide aux données spatiales et statistiques d\'Andalousie : cartes des communes via WFS et statistiques SIMA en trois lignes de code, avec visualisation interactive.',
+  },
+
+  'projects.p4.title': { es:'Flujos de Movilidad Urbana', en:'Urban Mobility Flows', pt:'Fluxos de Mobilidade Urbana', fr:'Flux de Mobilité Urbaine' },
+  'projects.p4.type':  { es:'Data Science · Visualización', en:'Data Science · Visualization', pt:'Data Science · Visualização', fr:'Data Science · Visualisation' },
+  'projects.p4.desc': {
+    es: 'Análisis de flujos de movilidad y pueblos dormitorio en Sevilla y Málaga con datos abiertos del MITMA: pipeline completo de descarga y transformación, y dashboard interactivo en Streamlit.',
+    en: 'Analysis of mobility flows and commuter towns in Seville and Málaga with MITMA open data: full download and transformation pipeline, and an interactive Streamlit dashboard.',
+    pt: 'Análise de fluxos de mobilidade e cidades-dormitório em Sevilha e Málaga com dados abertos do MITMA: pipeline completo de descarga e transformação, e dashboard interativo em Streamlit.',
+    fr: 'Analyse des flux de mobilité et des villes-dortoirs à Séville et Málaga avec les données ouvertes du MITMA : pipeline complet de téléchargement et transformation, et tableau de bord interactif Streamlit.',
+  },
+
+  'projects.p5.type': { es:'Deep Learning · Computer Vision', en:'Deep Learning · Computer Vision', pt:'Deep Learning · Computer Vision', fr:'Deep Learning · Computer Vision' },
+  'projects.p5.desc': {
+    es: 'Detección temprana de incendios en imágenes mediante redes neuronales convolucionales. Proyecto desarrollado en el bootcamp Saturdays AI Madrid (6ª edición, 2023).',
+    en: 'Early fire detection in images using convolutional neural networks. Project developed at the Saturdays AI Madrid bootcamp (6th edition, 2023).',
+    pt: 'Deteção precoce de incêndios em imagens através de redes neuronais convolucionais. Projeto desenvolvido no bootcamp Saturdays AI Madrid (6.ª edição, 2023).',
+    fr: 'Détection précoce d\'incendies dans des images par réseaux de neurones convolutifs. Projet développé au bootcamp Saturdays AI Madrid (6e édition, 2023).',
+  },
+
+  'projects.p6.type':  { es:'GenAI · Producto SaaS', en:'GenAI · SaaS Product', pt:'GenAI · Produto SaaS', fr:'GenAI · Produit SaaS' },
+  'projects.p6.desc': {
+    es: 'Reseñas de Google a partir de audio: el cliente escanea un QR, graba su opinión y recibe una reseña de texto pulida lista para publicar. Whisper + Llama vía Groq, multi-tenant, desplegado con Docker y en fase de validación con usuarios.',
+    en: 'Google reviews from audio: the customer scans a QR code, records their opinion and gets a polished text review ready to publish. Whisper + Llama via Groq, multi-tenant, deployed with Docker and in user-validation phase.',
+    pt: 'Reviews do Google a partir de áudio: o cliente lê um QR, grava a sua opinião e recebe uma review de texto polida pronta a publicar. Whisper + Llama via Groq, multi-tenant, implantado com Docker e em fase de validação com utilizadores.',
+    fr: 'Avis Google à partir d\'audio : le client scanne un QR, enregistre son avis et reçoit un texte d\'avis peaufiné prêt à publier. Whisper + Llama via Groq, multi-tenant, déployé avec Docker et en phase de validation utilisateurs.',
+  },
+
   /* ── BLOG — header ── */
   'blog.label':         { es:'// blog.posts[]',  en:'// blog.posts[]',  pt:'// blog.posts[]',  fr:'// blog.posts[]'  },
   'blog.title':         { es:'Blog',              en:'Blog',              pt:'Blog',              fr:'Blog'              },

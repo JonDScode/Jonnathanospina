@@ -90,6 +90,8 @@
             background: transparent;
         }
         .project-link:hover { color: var(--accent); border-color: rgba(110, 231, 247, 0.3); }
+        .project-link--static { cursor: default; border-style: dashed; opacity: 0.7; }
+        .project-link--static:hover { color: var(--muted); border-color: var(--border); }
 
         @media (max-width: 768px) {
             .main-container { padding: 6rem 1.2rem 4rem; }
@@ -123,109 +125,103 @@
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-index">01 /</div>
-                <h3 class="project-title">AI-Powered Financial Analysis Tool</h3>
-                <p class="project-type">Machine Learning · Finance</p>
-                <p class="project-description">A comprehensive tool for financial market analysis using machine learning algorithms. Features predictive modeling, sentiment analysis, and automated reporting capabilities.</p>
+                <h3 class="project-title">Soccer Analytics Lab</h3>
+                <p class="project-type" data-i18n="projects.p1.type">Data Science · Sports Analytics</p>
+                <p class="project-description" data-i18n="projects.p1.desc">Laboratorio de ciencia de datos aplicada al fútbol: modelos de goles esperados (xG), forecasting de resultados (Poisson / Dixon-Coles), redes de pases y scouting de jugadores sobre event data profesional.</p>
                 <div class="project-tech">
                     <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Scikit-learn</span>
-                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">StatsBomb</span>
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">XGBoost</span>
+                    <span class="tech-tag">DuckDB</span>
                     <span class="tech-tag">Streamlit</span>
-                    <span class="tech-tag">PostgreSQL</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">Demo</a>
-                    <a href="#" class="project-link">Source</a>
+                    <a href="https://github.com/JonDScode/Soccer" class="project-link" target="_blank" rel="noopener">GitHub</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-index">02 /</div>
-                <h3 class="project-title">Modern Portfolio Website</h3>
-                <p class="project-type">Web Development · Frontend</p>
-                <p class="project-description">A responsive portfolio website with modern design, hyperbolic tessellation animations, and optimized performance across all devices.</p>
+                <h3 class="project-title">Dictum</h3>
+                <p class="project-type" data-i18n="projects.p2.type">GenAI · Agentes</p>
+                <p class="project-description" data-i18n="projects.p2.desc">Tutor agéntico de inglés: agente conversacional construido sobre Claude con voz híbrida (STT/TTS) y app universal iOS / Android / web. Monorepo TypeScript con arquitectura de agentes.</p>
                 <div class="project-tech">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Canvas API</span>
-                    <span class="tech-tag">Möbius transforms</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Claude API</span>
+                    <span class="tech-tag">Expo · React Native</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Turborepo</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">Live Site</a>
-                    <a href="#" class="project-link">GitHub</a>
+                    <span class="project-link project-link--static" data-i18n="projects.private">// código privado</span>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-index">03 /</div>
-                <h3 class="project-title">Data Visualization Dashboard</h3>
-                <p class="project-type">Data Science · Visualization</p>
-                <p class="project-description">Interactive dashboard for complex data visualization with real-time updates, multiple chart types and filtering options.</p>
+                <h3 class="project-title">andalucia-quickdata</h3>
+                <p class="project-type" data-i18n="projects.p3.type">Data Engineering · Open Data</p>
+                <p class="project-description" data-i18n="projects.p3.desc">Librería Python para acceso ágil a datos espaciales y estadísticos de Andalucía: mapas de municipios vía WFS y estadísticas del SIMA en tres líneas de código, con visualización interactiva.</p>
                 <div class="project-tech">
-                    <span class="tech-tag">React.js</span>
-                    <span class="tech-tag">D3.js</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">Socket.io</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">GeoPandas</span>
+                    <span class="tech-tag">WFS</span>
+                    <span class="tech-tag">SIMA</span>
+                    <span class="tech-tag">MIT License</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">Demo</a>
-                    <a href="#" class="project-link">Docs</a>
+                    <a href="https://github.com/JonDScode/andalucia_quickdata" class="project-link" target="_blank" rel="noopener">GitHub</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-index">04 /</div>
-                <h3 class="project-title">REST API for E-commerce</h3>
-                <p class="project-type">Backend Development · API</p>
-                <p class="project-description">Scalable REST API with authentication, payment processing, and comprehensive admin features. Built with modern security practices.</p>
+                <h3 class="project-title" data-i18n="projects.p4.title">Flujos de Movilidad Urbana</h3>
+                <p class="project-type" data-i18n="projects.p4.type">Data Science · Visualización</p>
+                <p class="project-description" data-i18n="projects.p4.desc">Análisis de flujos de movilidad y pueblos dormitorio en Sevilla y Málaga con datos abiertos del MITMA: pipeline completo de descarga y transformación, y dashboard interactivo en Streamlit.</p>
                 <div class="project-tech">
-                    <span class="tech-tag">Java</span>
-                    <span class="tech-tag">Spring Boot</span>
-                    <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag">JWT</span>
-                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">pyspainmobility</span>
+                    <span class="tech-tag">MITMA Open Data</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">API Docs</a>
-                    <a href="#" class="project-link">Source</a>
+                    <a href="https://github.com/JonDScode/Mobility_app" class="project-link" target="_blank" rel="noopener">GitHub</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-index">05 /</div>
-                <h3 class="project-title">NLP Text Analysis Tool</h3>
-                <p class="project-type">Natural Language Processing · AI</p>
-                <p class="project-description">Advanced text analysis using NLP techniques: sentiment analysis, entity recognition, and text summarization.</p>
+                <h3 class="project-title">Fire Detection</h3>
+                <p class="project-type" data-i18n="projects.p5.type">Deep Learning · Computer Vision</p>
+                <p class="project-description" data-i18n="projects.p5.desc">Detección temprana de incendios en imágenes mediante redes neuronales convolucionales. Proyecto desarrollado en el bootcamp Saturdays AI Madrid (6ª edición, 2023).</p>
                 <div class="project-tech">
                     <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Spacy</span>
-                    <span class="tech-tag">NLTK</span>
-                    <span class="tech-tag">Flask</span>
                     <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">CNN</span>
+                    <span class="tech-tag">Jupyter</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">Demo</a>
-                    <a href="#" class="project-link">Paper</a>
+                    <a href="https://github.com/JonDScode/Fire_Detection" class="project-link" target="_blank" rel="noopener">GitHub</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-index">06 /</div>
-                <h3 class="project-title">Cryptocurrency Trading Bot</h3>
-                <p class="project-type">Fintech · Automation</p>
-                <p class="project-description">Intelligent trading bot with risk management, technical analysis, and automated execution. Includes full backtesting capabilities.</p>
+                <h3 class="project-title">Dilofácil</h3>
+                <p class="project-type" data-i18n="projects.p6.type">GenAI · Producto SaaS</p>
+                <p class="project-description" data-i18n="projects.p6.desc">Reseñas de Google a partir de audio: el cliente escanea un QR, graba su opinión y recibe una reseña de texto pulida lista para publicar. Whisper + Llama vía Groq, multi-tenant, desplegado con Docker y en fase de validación con usuarios.</p>
                 <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">ccxt</span>
-                    <span class="tech-tag">TA-Lib</span>
-                    <span class="tech-tag">Redis</span>
-                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">Groq · Whisper</span>
+                    <span class="tech-tag">Llama 3.3</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">Docker</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link">Performance</a>
-                    <a href="#" class="project-link">Docs</a>
+                    <span class="project-link project-link--static" data-i18n="projects.private">// código privado</span>
                 </div>
             </div>
         </div>
