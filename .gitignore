@@ -1,6 +1,3 @@
-# Assets folder (images, videos, etc.)
-assets/
-
 # Node modules (if using npm/yarn)
 node_modules/
 
