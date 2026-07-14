@@ -40,10 +40,10 @@ const TRANSLATIONS = {
   },
   'index.card3.title': { es:'GenAI &amp; Agentes', en:'GenAI &amp; Agents', pt:'GenAI &amp; Agentes', fr:'GenAI &amp; Agents' },
   'index.card3.desc': {
-    es: 'Arquitecturas RAG, Prompt Flows, embeddings y sistemas multi-agente. Construyendo soluciones de IA generativa con Azure AI y modelos de lenguaje de última generación.',
-    en: 'RAG architectures, Prompt Flows, embeddings and multi-agent systems. Building generative AI solutions with Azure AI and state-of-the-art language models.',
-    pt: 'Arquiteturas RAG, Prompt Flows, embeddings e sistemas multi-agente. Construindo soluções de IA generativa com Azure AI e modelos de linguagem de última geração.',
-    fr: 'Architectures RAG, Prompt Flows, embeddings et systèmes multi-agents. Construction de solutions d\'IA générative avec Azure AI et les derniers modèles de langage.',
+    es: 'Arquitecturas RAG, sistemas multi-agente con LangChain / LangGraph, embeddings y tool calling. Soluciones de IA generativa en producción con Azure AI y Claude.',
+    en: 'RAG architectures, multi-agent systems with LangChain / LangGraph, embeddings and tool calling. Generative AI solutions in production with Azure AI and Claude.',
+    pt: 'Arquiteturas RAG, sistemas multi-agente com LangChain / LangGraph, embeddings e tool calling. Soluções de IA generativa em produção com Azure AI e Claude.',
+    fr: 'Architectures RAG, systèmes multi-agents avec LangChain / LangGraph, embeddings et tool calling. Solutions d\'IA générative en production avec Azure AI et Claude.',
   },
 
   /* ── INDEX — footer ── */
