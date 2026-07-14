@@ -227,6 +227,26 @@
             .item-header { flex-direction: column; }
             .skills-container { grid-template-columns: 1fr; }
         }
+
+        /* ── PRINT / PDF (usado por la Action cv-pdf.yml) ── */
+        @media print {
+            :root {
+                --bg:       #ffffff;
+                --surface:  #ffffff;
+                --elevated: #f2f2f5;
+                --accent:   #0b7285;
+                --accent2:  #5f3dc4;
+                --text:     #111118;
+                --muted:    #4a4a58;
+                --border:   #d5d5dd;
+            }
+            #bg-canvas, .nav-container, .status-bar, .lang-switcher, .cv-download-btn { display: none !important; }
+            body { background: #ffffff; color: var(--text); }
+            .cv-container { padding: 0; max-width: 100%; }
+            .cv-section, .experience-item, .education-item { break-inside: avoid; }
+            a { color: var(--text); }
+            .contact-info a { color: var(--accent); }
+        }
     </style>
 </head>
 <body>

@@ -1,0 +1,33 @@
+name: CV PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pages/cv.html"
+      - "CSS/design-system.css"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Renderizar cv.html a PDF con Chrome headless
+        run: |
+          google-chrome --headless=new --disable-gpu --no-sandbox \
+            --no-pdf-header-footer \
+            --virtual-time-budget=5000 \
+            --print-to-pdf="$PWD/assets/cv-jonnathan-ospina.pdf" \
+            "file://$PWD/pages/cv.html"
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/cv-jonnathan-ospina.pdf
+          git diff --cached --quiet || { git commit -m "cv: regenera PDF desde cv.html"; git push; }

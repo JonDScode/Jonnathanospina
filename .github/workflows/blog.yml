@@ -1,0 +1,50 @@
+name: Blog build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "blog/posts/**"
+      - "templates/**"
+      - "scripts/build_blog.py"
+  repository_dispatch:
+    types: [publish-post]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Publicación remota: la app externa puede mandar el post en el payload
+      # en lugar de escribir el archivo por la API de contents.
+      - name: Escribir post desde el payload (repository_dispatch)
+        if: github.event_name == 'repository_dispatch' && github.event.client_payload.filename != ''
+        env:
+          FILENAME: ${{ github.event.client_payload.filename }}
+          CONTENT_B64: ${{ github.event.client_payload.content_b64 }}
+        run: |
+          case "$FILENAME" in
+            (*/*|*..*) echo "filename invalido"; exit 1 ;;
+          esac
+          echo "$CONTENT_B64" | base64 -d > "blog/posts/$FILENAME"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Construir blog
+        run: |
+          pip install markdown pyyaml
+          python scripts/build_blog.py
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pages/blog pages/blog.html sitemap.xml blog/posts
+          git diff --cached --quiet || { git commit -m "blog: build automatico"; git push; }

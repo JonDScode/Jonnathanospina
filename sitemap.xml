@@ -16,4 +16,8 @@
     <loc>https://www.jonnathanospina.com/pages/blog.html</loc>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://www.jonnathanospina.com/pages/blog/publicar-sin-backend.html</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
