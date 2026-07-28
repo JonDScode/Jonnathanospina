@@ -7,6 +7,7 @@
     <meta name="description" content="Currículum de Jonnathan Ospina: AI Engineer y Data Scientist en Madrid. LLMs, agentes, RAG, pipelines de datos y Azure AI. Descargable en PDF.">
     <meta name="author" content="Jonnathan Ospina Montalvo">
     <meta name="theme-color" content="#0a0a0f">
+    <script>(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="canonical" href="https://www.jonnathanospina.com/pages/cv.html">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://www.jonnathanospina.com/pages/cv.html">
@@ -228,9 +229,22 @@
             .skills-container { grid-template-columns: 1fr; }
         }
 
+        .pdf-note { display: none; }
+
         /* ── PRINT / PDF (usado por la Action cv-pdf.yml) ── */
         @media print {
-            :root {
+            .pdf-note {
+                display: block;
+                margin-top: 2.5rem;
+                padding-top: 1rem;
+                border-top: 1px solid var(--border);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.7rem;
+                color: var(--muted);
+            }
+            :root,
+            :root[data-theme="dark"],
+            :root[data-theme="light"] {
                 --bg:       #ffffff;
                 --surface:  #ffffff;
                 --elevated: #f2f2f5;
@@ -511,6 +525,8 @@
                 </div>
             </div>
         </section>
+
+        <p class="pdf-note">CV generado automáticamente desde www.jonnathanospina.com — verificar la versión vigente en la web.</p>
     </main>
 
     <!-- Status Bar -->
@@ -527,6 +543,7 @@
     <!-- Analytics: crea la cuenta en https://www.goatcounter.com con el código "jonnathanospina" y descomenta -->
     <!-- <script data-goatcounter="https://jonnathanospina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
     <script src="../JS/i18n.js"></script>
+    <script src="../JS/theme.js"></script>
     <script>
     /* ── Campo vectorial (fondo sutil) ── */
     (function(){

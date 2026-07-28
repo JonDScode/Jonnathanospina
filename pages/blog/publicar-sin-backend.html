@@ -7,6 +7,7 @@
     <meta name="description" content="Cómo este blog se publica desde cualquier aplicación con una sola llamada HTTP, sin servidor propio: markdown en el repo, GitHub Actions como builder y GitHub Pages como hosting.">
     <meta name="author" content="Jonnathan Ospina Montalvo">
     <meta name="theme-color" content="#0a0a0f">
+    <script>(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="canonical" href="https://www.jonnathanospina.com/pages/blog/publicar-sin-backend.html">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://www.jonnathanospina.com/pages/blog/publicar-sin-backend.html">
@@ -52,10 +53,10 @@
             letter-spacing: 0.02em;
         }
         .post-content h3 { font-size: 1rem; margin: 2rem 0 0.8rem; color: var(--text); }
-        .post-content p { margin-bottom: 1.2rem; color: #c7c7d4; }
+        .post-content p { margin-bottom: 1.2rem; color: var(--text-soft); }
         .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(110,231,247,0.3); }
         .post-content a:hover { border-bottom-color: var(--accent); }
-        .post-content ul, .post-content ol { margin: 0 0 1.2rem 1.4rem; color: #c7c7d4; }
+        .post-content ul, .post-content ol { margin: 0 0 1.2rem 1.4rem; color: var(--text-soft); }
         .post-content li { margin-bottom: 0.4rem; }
         .post-content code {
             font-family: 'JetBrains Mono', monospace;
@@ -72,7 +73,7 @@
             overflow-x: auto;
             margin-bottom: 1.4rem;
         }
-        .post-content pre code { background: none; border: none; padding: 0; color: #c7c7d4; font-size: 0.82rem; }
+        .post-content pre code { background: none; border: none; padding: 0; color: var(--text-soft); font-size: 0.82rem; }
         .post-content blockquote {
             border-left: 3px solid var(--accent2);
             padding: 0.2rem 0 0.2rem 1.2rem;
@@ -189,6 +190,7 @@
     <!-- Analytics: crea la cuenta en https://www.goatcounter.com con el código "jonnathanospina" y descomenta -->
     <!-- <script data-goatcounter="https://jonnathanospina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
     <script src="../../JS/i18n.js"></script>
+    <script src="../../JS/theme.js"></script>
     <script>
     (function(){
         const canvas=document.getElementById('bg-canvas');

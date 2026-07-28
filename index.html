@@ -7,6 +7,7 @@
     <meta name="description" content="AI Engineer y Data Scientist en Madrid. Especializado en LLMs, sistemas de agentes, RAG y machine learning en producción. Certificado Azure AI Engineer.">
     <meta name="author" content="Jonnathan Ospina Montalvo">
     <meta name="theme-color" content="#0a0a0f">
+    <script>(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
     <link rel="canonical" href="https://www.jonnathanospina.com/">
 
     <!-- Open Graph -->
@@ -73,6 +74,15 @@
             );
             z-index: 1;
             pointer-events: none;
+        }
+
+        :root[data-theme="light"] .hero::after {
+            background: radial-gradient(
+                ellipse 70% 60% at 50% 50%,
+                rgba(247,247,250,0.55) 0%,
+                rgba(247,247,250,0.82) 60%,
+                rgba(247,247,250,0.97) 100%
+            );
         }
 
         .hero-content { position: relative; z-index: 2; }
@@ -216,6 +226,7 @@
     <!-- Analytics: crea la cuenta en https://www.goatcounter.com con el código "jonnathanospina" y descomenta -->
     <!-- <script data-goatcounter="https://jonnathanospina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
     <script src="JS/i18n.js"></script>
+    <script src="JS/theme.js"></script>
     <script>
     /* ═══════════════════════════════════════════════════════════════
        MOSAICO HIPERBÓLICO — Disco de Poincaré

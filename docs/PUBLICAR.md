@@ -86,6 +86,15 @@ curl -X POST \
   }"
 ```
 
+## Borradores
+
+`blog/drafts/` está en `.gitignore`: todo lo que escribas ahí **nunca se sube**
+al repo (que es público). Flujo:
+
+1. Escribe el borrador en `blog/drafts/mi-idea.md` (mismo formato de frontmatter)
+2. Itera con calma — no hay riesgo de publicarlo por accidente
+3. Para publicar: renómbralo con fecha y muévelo a `blog/posts/`, commit y push
+
 ## Escribir en local (sin API)
 
 ```powershell

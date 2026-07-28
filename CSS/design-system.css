@@ -13,8 +13,48 @@
     --accent2:  #a78bfa;
     --text:     #f0f0f5;
     --muted:    #6b7280;
+    --text-soft: #c7c7d4;
     --border:   rgba(110, 231, 247, 0.1);
 }
+
+/* ── TEMA CLARO ── */
+:root[data-theme="light"] {
+    --bg:       #f7f7fa;
+    --surface:  #ffffff;
+    --elevated: #ececf2;
+    --accent:   #0b7285;
+    --accent2:  #6d28d9;
+    --text:     #16161d;
+    --muted:    #5a5a6b;
+    --text-soft: #3c3c48;
+    --border:   rgba(11, 114, 133, 0.16);
+}
+
+/* Fondos con color fijo que no usan tokens */
+:root[data-theme="light"] .nav-container { background: rgba(247, 247, 250, 0.85); }
+:root[data-theme="light"] .status-bar    { background: rgba(255, 255, 255, 0.97); }
+
+/* Los canvas pintan sobre #0a0a0f: en claro se invierten conservando el tono */
+:root[data-theme="light"] #bg-canvas,
+:root[data-theme="light"] #hyperbolic-canvas {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* ── THEME TOGGLE ── */
+.theme-btn {
+    margin-left: 0.6rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 1.9rem;
+    height: 1.9rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.theme-btn:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ── RESET ── */
 *, *::before, *::after {

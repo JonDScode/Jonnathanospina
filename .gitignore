@@ -1,3 +1,6 @@
+# Borradores del blog: NUNCA se suben; mover a blog/posts/ para publicar
+blog/drafts/
+
 # Node modules (if using npm/yarn)
 node_modules/
 
