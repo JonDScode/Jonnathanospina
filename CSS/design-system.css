@@ -57,7 +57,7 @@
 .theme-btn:hover { color: var(--accent); border-color: var(--accent); }
 
 .theme-btn .icon { display: inline-block; }
-.theme-btn .icon.moon { transform: rotate(15deg); }
+.theme-btn .icon.moon { transform: rotate(-25deg); }
 
 /* ── RESET ── */
 *, *::before, *::after {
