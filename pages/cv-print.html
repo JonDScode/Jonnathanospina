@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CV — Jonnathan Ospina Montalvo</title>
+    <!--
+      Documento fuente del PDF del CV (Action cv-pdf.yml).
+      Un folio A4, sobrio. No se enlaza desde la web: solo existe para imprimirse.
+    -->
+    <style>
+        @page { size: A4; margin: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: #fff; }
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            color: #111;
+            font-size: 10pt;
+            line-height: 1.38;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 14mm 17mm 10mm;
+        }
+        a { color: #111; text-decoration: none; }
+        .contact a { color: #1a4b8f; text-decoration: underline; }
+
+        header { text-align: center; margin-bottom: 4mm; }
+        h1 { font-size: 19pt; font-weight: bold; letter-spacing: 0.01em; margin-bottom: 1.5mm; }
+        .contact { font-size: 9.5pt; }
+
+        .summary {
+            font-style: italic;
+            font-size: 9.7pt;
+            border-top: 1px solid #999;
+            padding-top: 3mm;
+            margin-bottom: 4mm;
+        }
+
+        h2 {
+            font-size: 10pt;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            border-bottom: 1.5px solid #111;
+            padding-bottom: 0.8mm;
+            margin: 4mm 0 2.5mm;
+        }
+
+        .row { display: flex; justify-content: space-between; align-items: baseline; }
+        .org { font-weight: bold; }
+        .where { font-weight: bold; }
+        .role { font-size: 9.7pt; }
+        .dates { font-style: italic; font-size: 9.5pt; }
+
+        ul { margin: 1mm 0 3mm 5mm; }
+        li { margin-bottom: 0.8mm; font-size: 9.6pt; }
+
+        .edu-line { display: flex; justify-content: space-between; font-size: 9.6pt; margin-bottom: 1mm; }
+        .edu-line .what strong { font-weight: bold; }
+
+        .inline-list { font-size: 9.6pt; margin-bottom: 1.2mm; }
+        .inline-list strong { font-weight: bold; }
+
+        footer {
+            margin-top: 5mm;
+            padding-top: 2mm;
+            border-top: 1px solid #ccc;
+            font-size: 7.5pt;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jonnathan Ospina Montalvo</h1>
+        <p class="contact">Madrid, España &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/jonnathanospinam">linkedin.com/in/jonnathanospinam</a> &nbsp;·&nbsp; jonnathanospinam@gmail.com &nbsp;·&nbsp; <a href="https://github.com/JonDScode">github.com/JonDScode</a> &nbsp;·&nbsp; <a href="https://www.jonnathanospina.com">jonnathanospina.com</a></p>
+    </header>
+
+    <p class="summary">Científico de Datos e Ingeniero de IA especializado en soluciones basadas en LLMs y sistemas de agentes. Experiencia construyendo pipelines de datos e industrializando modelos de Machine Learning con enfoque de IA responsable. Certificado Azure AI Engineer. Actualmente desarrollo productos GenAI en producción (agentes conversacionales, voz, RAG).</p>
+
+    <h2>EXPERIENCIA PROFESIONAL</h2>
+
+    <div class="row"><span class="org">Factoría F5</span><span class="where">Madrid, España</span></div>
+    <div class="row"><span class="role">Científico de Datos — Especialista en IA</span><span class="dates">2023 – Presente</span></div>
+    <ul>
+        <li>Diseñé y validé arquitecturas GenAI basadas en LLMs y Deep Learning para proyectos de impacto social y eficiencia operativa.</li>
+        <li>Implementé pipelines de ingesta y transformación de datos garantizando calidad y trazabilidad de los modelos.</li>
+        <li>Lideré como trainer los módulos de IA Generativa, integración de APIs y desarrollo robusto en el Bootcamp de IA School.</li>
+        <li>Colaboré con administraciones públicas (Ayuntamientos, UE) definiendo métricas de éxito y desplegando soluciones de innovación.</li>
+    </ul>
+
+    <div class="row"><span class="org">Freelance</span><span class="where">Madrid, España</span></div>
+    <div class="row"><span class="role">Desarrollador de Software &amp; Frontend</span><span class="dates">2022 – 2023</span></div>
+    <ul>
+        <li>Desarrollé sitios e-commerce y aplicaciones web para clientes, con enfoque frontend para la visualización de soluciones digitales.</li>
+    </ul>
+
+    <div class="row"><span class="org">Universidad Autónoma de Occidente</span><span class="where">Colombia</span></div>
+    <div class="row"><span class="role">Profesor Universitario</span><span class="dates">2017 – 2021</span></div>
+    <ul>
+        <li>Liderazgo académico en mercadeo y legislación: resolución de problemas complejos y documentación técnica.</li>
+    </ul>
+
+    <h2>FORMACIÓN Y CERTIFICACIONES</h2>
+    <div class="edu-line"><span class="what"><strong>Máster en Inteligencia Artificial</strong> — Universidad Internacional de La Rioja (UNIR)</span><span class="dates">2024 – 2025</span></div>
+    <div class="edu-line"><span class="what"><strong>Curso Universitario Avanzado en Data Engineering</strong> — UNIR</span><span class="dates">2024</span></div>
+    <div class="edu-line"><span class="what"><strong>Azure AI Engineer Associate (AI-102)</strong> y <strong>Azure AI Fundamentals</strong> — Microsoft</span><span class="dates">Certificaciones</span></div>
+    <div class="edu-line"><span class="what"><strong>Bootcamp en Inteligencia Artificial</strong> — Saturdays AI Madrid</span><span class="dates">2023</span></div>
+    <div class="edu-line"><span class="what"><strong>Grado en Comercio Internacional</strong> — UCEVA, Colombia</span><span class="dates">2010 – 2014</span></div>
+
+    <h2>HABILIDADES TÉCNICAS</h2>
+    <p class="inline-list"><strong>IA &amp; Datos:</strong> Python, LLMs, RAG, LangChain / LangGraph, Claude API, Agentes, Azure AI Services, scikit-learn, PyTorch, Pandas</p>
+    <p class="inline-list"><strong>Ingeniería:</strong> FastAPI, Docker, Git, SQL, Streamlit, CI/CD (GitHub Actions), Java, JavaScript</p>
+
+    <h2>IDIOMAS</h2>
+    <p class="inline-list">Español (nativo) &nbsp;·&nbsp; Inglés (avanzado) &nbsp;·&nbsp; Portugués (intermedio)</p>
+
+    <footer>CV generado automáticamente desde www.jonnathanospina.com — versión vigente siempre en la web.</footer>
+</body>
+</html>

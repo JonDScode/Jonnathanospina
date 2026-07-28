@@ -15,12 +15,18 @@
     if (meta) meta.setAttribute('content', t === 'light' ? '#f7f7fa' : '#0a0a0f');
   }
 
+  function icon(t) {
+    return t === 'light'
+      ? '<span class="icon moon">☾</span>'
+      : '<span class="icon">☀</span>';
+  }
+
   function apply(t) {
     document.documentElement.setAttribute('data-theme', t);
     try { localStorage.setItem('theme', t); } catch (e) {}
     syncMeta(t);
     var btn = document.querySelector('.theme-btn');
-    if (btn) btn.textContent = t === 'light' ? '☾' : '☀';
+    if (btn) btn.innerHTML = icon(t);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -29,7 +35,7 @@
     var btn = document.createElement('button');
     btn.className = 'theme-btn';
     btn.setAttribute('aria-label', 'Cambiar tema');
-    btn.textContent = current() === 'light' ? '☾' : '☀';
+    btn.innerHTML = icon(current());
     btn.addEventListener('click', function () {
       apply(current() === 'light' ? 'dark' : 'light');
     });
