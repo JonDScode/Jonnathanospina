@@ -213,6 +213,14 @@ const TRANSLATIONS = {
     fr: 'Scoring de risque de crédit de bout en bout : XGBoost sur 307 000 prêts réels Home Credit (AUC 0.78), explicabilité SHAP avec des reason codes excluant les attributs protégés, comparaison Deep Learning et API de scoring FastAPI + Docker.',
   },
 
+  'projects.p8.type': { es:'OSINT · Inteligencia Marítima', en:'OSINT · Maritime Intelligence', pt:'OSINT · Inteligência Marítima', fr:'OSINT · Renseignement Maritime' },
+  'projects.p8.desc': {
+    es: 'Plataforma de inteligencia geoespacial en tiempo real sobre la base open source OSIRIS: mapa WebGL con miles de entidades en vivo (tráfico aéreo y marítimo, sismos, sanciones OFAC, eventos GDELT), scoring de riesgo país y análisis con IA. Especialización marítima propia en desarrollo: chokepoints, AIS y riesgo de cadena de suministro.',
+    en: 'Real-time geospatial intelligence platform built on the open source OSIRIS base: WebGL map with thousands of live entities (air and maritime traffic, earthquakes, OFAC sanctions, GDELT events), country risk scoring and AI analysis. Own maritime specialization in progress: chokepoints, AIS and supply chain risk.',
+    pt: 'Plataforma de inteligência geoespacial em tempo real sobre a base open source OSIRIS: mapa WebGL com milhares de entidades ao vivo (tráfego aéreo e marítimo, sismos, sanções OFAC, eventos GDELT), scoring de risco-país e análise com IA. Especialização marítima própria em desenvolvimento: chokepoints, AIS e risco de cadeia de abastecimento.',
+    fr: 'Plateforme de renseignement géospatial en temps réel sur la base open source OSIRIS : carte WebGL avec des milliers d\'entités en direct (trafic aérien et maritime, séismes, sanctions OFAC, événements GDELT), scoring de risque pays et analyse par IA. Spécialisation maritime propre en cours : chokepoints, AIS et risque de chaîne d\'approvisionnement.',
+  },
+
   /* ── BLOG — header ── */
   'blog.label':         { es:'// blog.posts[]',  en:'// blog.posts[]',  pt:'// blog.posts[]',  fr:'// blog.posts[]'  },
   'blog.title':         { es:'Blog',              en:'Blog',              pt:'Blog',              fr:'Blog'              },
