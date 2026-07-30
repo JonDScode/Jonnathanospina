@@ -27,6 +27,9 @@ BASE_URL = "https://www.jonnathanospina.com"
 MD = markdown.Markdown(extensions=["fenced_code", "tables", "toc"])
 
 
+LANGS = ("es", "en", "pt", "fr")
+
+
 def parse_post(path: Path) -> dict:
     raw = path.read_text(encoding="utf-8")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", raw, re.DOTALL)
@@ -40,6 +43,14 @@ def parse_post(path: Path) -> dict:
     slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", path.stem)
     MD.reset()
     words = len(re.findall(r"\w+", body))
+    # Traducciones opcionales de título/descripción: title_en, description_fr, ...
+    # (el cuerpo del post se queda en su idioma original; solo se traduce el escaparate)
+    i18n = {}
+    for field in ("title", "description"):
+        i18n[field] = {"es": str(meta[field])}
+        for lang in LANGS[1:]:
+            if f"{field}_{lang}" in meta:
+                i18n[field][lang] = str(meta[f"{field}_{lang}"])
     return {
         "slug": slug,
         "title": str(meta["title"]),
@@ -48,6 +59,7 @@ def parse_post(path: Path) -> dict:
         "category": str(meta.get("category", "IA & Datos")),
         "html": MD.convert(body),
         "minutes": max(1, round(words / 200)),
+        "i18n": i18n,
     }
 
 
@@ -61,15 +73,35 @@ def render_post(post: dict, template: str) -> str:
 
 
 def index_entry(post: dict) -> str:
+    slug = post["slug"]
     return f'''            <article class="blog-post">
                 <div class="post-meta">
                     <span class="post-date">{post["date"]}</span>
                     <span class="post-category">{post["category"]}</span>
                 </div>
-                <h2 class="post-title">{post["title"]}</h2>
-                <p class="post-excerpt">{post["description"]}</p>
-                <a href="blog/{post["slug"]}.html" class="read-more">Leer &rarr;</a>
+                <h2 class="post-title" data-i18n="blog.post.{slug}.title">{post["title"]}</h2>
+                <p class="post-excerpt" data-i18n="blog.post.{slug}.desc">{post["description"]}</p>
+                <a href="blog/{slug}.html" class="read-more" data-i18n="blog.readmore">Leer &rarr;</a>
             </article>'''
+
+
+def build_blog_i18n(posts: list) -> str:
+    """Genera JS/blog-i18n.js: registra las traducciones de los posts en TRANSLATIONS.
+
+    Se carga después de i18n.js y antes del DOMContentLoaded que aplica el idioma,
+    así el switcher traduce también los títulos/descripciones generados.
+    """
+    import json
+    entries = {"blog.readmore": {"es": "Leer →", "en": "Read →", "pt": "Ler →", "fr": "Lire →"}}
+    for p in posts:
+        entries[f"blog.post.{p['slug']}.title"] = p["i18n"]["title"]
+        entries[f"blog.post.{p['slug']}.desc"] = p["i18n"]["description"]
+    payload = json.dumps(entries, ensure_ascii=False, indent=2)
+    return (
+        "/* GENERADO por scripts/build_blog.py — no editar a mano.\n"
+        "   Traducciones de títulos/descripciones de posts (el cuerpo queda en su idioma). */\n"
+        f"Object.assign(TRANSLATIONS, {payload});\n"
+    )
 
 
 def build_sitemap(posts: list) -> str:
@@ -118,6 +150,10 @@ def main() -> None:
 
     SITEMAP.write_text(build_sitemap(posts), encoding="utf-8")
     print("sitemap: ok")
+
+    blog_i18n = ROOT / "JS" / "blog-i18n.js"
+    blog_i18n.write_text(build_blog_i18n(posts), encoding="utf-8")
+    print("blog-i18n: ok")
 
 
 if __name__ == "__main__":

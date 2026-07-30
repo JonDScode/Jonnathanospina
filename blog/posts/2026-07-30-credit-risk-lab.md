@@ -1,7 +1,13 @@
 ---
 title: "Credit Risk Lab: scoring bancario explicable, de los datos crudos a la API"
+title_en: "Credit Risk Lab: explainable credit scoring, from raw data to the API"
+title_pt: "Credit Risk Lab: scoring bancário explicável, dos dados crus à API"
+title_fr: "Credit Risk Lab : scoring bancaire explicable, des données brutes à l'API"
 date: "2026-07-30"
 description: "Cómo construí un sistema de scoring de crédito completo — XGBoost sobre 307.000 préstamos, reason codes con SHAP, contrato de fairness testeado y API en Docker — y las decisiones que lo hacen defendible ante un comité de riesgo."
+description_en: "How I built a complete credit scoring system — XGBoost on 307,000 loans, SHAP reason codes, a tested fairness contract and a Dockerized API — and the decisions that make it defensible before a risk committee."
+description_pt: "Como construí um sistema completo de scoring de crédito — XGBoost sobre 307.000 empréstimos, reason codes com SHAP, contrato de fairness testado e API em Docker — e as decisões que o tornam defensável perante um comité de risco."
+description_fr: "Comment j'ai construit un système complet de scoring de crédit — XGBoost sur 307 000 prêts, reason codes SHAP, contrat de fairness testé et API Dockerisée — et les décisions qui le rendent défendable devant un comité des risques."
 category: "Machine Learning"
 ---
 

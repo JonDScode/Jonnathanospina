@@ -1,7 +1,13 @@
 ---
 title: "Publicar en un blog estático sin backend: GitHub como API"
+title_en: "Publishing to a static blog with no backend: GitHub as the API"
+title_pt: "Publicar num blog estático sem backend: GitHub como API"
+title_fr: "Publier sur un blog statique sans backend : GitHub comme API"
 date: "2026-07-14"
 description: "Cómo este blog se publica desde cualquier aplicación con una sola llamada HTTP, sin servidor propio: markdown en el repo, GitHub Actions como builder y GitHub Pages como hosting."
+description_en: "How this blog gets published from any application with a single HTTP call and no server of its own: markdown in the repo, GitHub Actions as the builder and GitHub Pages as the hosting."
+description_pt: "Como este blog é publicado a partir de qualquer aplicação com uma única chamada HTTP, sem servidor próprio: markdown no repo, GitHub Actions como builder e GitHub Pages como hosting."
+description_fr: "Comment ce blog est publié depuis n'importe quelle application avec un seul appel HTTP, sans serveur propre : markdown dans le repo, GitHub Actions comme builder et GitHub Pages comme hébergement."
 category: "Arquitectura"
 ---
 

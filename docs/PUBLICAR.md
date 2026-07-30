@@ -22,6 +22,12 @@ Contenido en markdown: encabezados `##`, código, tablas, listas, enlaces…
 
 `title`, `date` y `description` son obligatorios; `category` es opcional.
 
+**Multilenguaje (opcional)**: añade `title_en`, `description_en` (y `_pt`, `_fr`)
+al frontmatter y el switcher de idiomas traducirá el título y la descripción del
+post en el índice y en la cabecera del artículo. El **cuerpo** del post se queda
+en su idioma original — solo se traduce el escaparate. Sin esos campos, todo cae
+al español. El build genera `JS/blog-i18n.js` automáticamente (no editar a mano).
+
 ## Token (una sola vez)
 
 1. GitHub → Settings → Developer settings → Fine-grained tokens → Generate new token
