@@ -17,7 +17,7 @@ Jonnathanospina/
 ├── pages/
 │   ├── cv.html             # CV — vector field background (Perlin flow)
 │   ├── projects.html       # Projects — vector field background
-│   └── blog.html           # Blog — Rule 30 cellular automaton background
+│   └── blog.html           # Blog — Conway's Game of Life background
 ├── index.html              # Home — hyperbolic mosaic (Poincare disk)
 ├── CNAME
 ├── .gitignore
@@ -31,7 +31,7 @@ Jonnathanospina/
 | `index.html` | Hyperbolic mosaic | Poincare disk model, {5,4} tiling, Mobius transforms `T_a(z) = (z-a)/(1-az)` |
 | `cv.html` | Vector field | Perlin-like noise flow, `angle = noise(x,y,t) * 4pi` |
 | `projects.html` | Vector field | Same as CV, violet palette |
-| `blog.html` | Rule 30 automaton | Wolfram elementary CA, `k=3, r=1` |
+| `blog.html` | Conway's Game of Life | Toroidal grid, B3/S23, random reseed on stagnation |
 
 ## CSS Architecture
 
