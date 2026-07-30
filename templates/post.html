@@ -141,7 +141,7 @@
             <span>online</span>
         </div>
         <div class="status-item">
-            <span>Rule 30 · autómata celular</span>
+            <span>Conway · juego de la vida</span>
         </div>
         <div class="status-item">
             <span id="current-time"></span>
@@ -153,37 +153,55 @@
     <script src="../../JS/i18n.js"></script>
     <script src="../../JS/theme.js"></script>
     <script>
+    /* ── Juego de la Vida de Conway (fondo sutil) ── */
     (function(){
         const canvas=document.getElementById('bg-canvas');
         const ctx=canvas.getContext('2d');
-        let W,H,cols,rows,grid=[],row=0;
-        const CELL=5,RULE=30;
-        function result(l,c,r){return(RULE>>((l<<2)|(c<<1)|r))&1;}
+        let W,H,cols,rows,grid,gen=0;
+        const CELL=6,DENSITY=0.14,RESEED_EVERY=500;
+        function seed(){
+            grid=new Uint8Array(cols*rows);
+            for(let i=0;i<grid.length;i++) grid[i]=Math.random()<DENSITY?1:0;
+            gen=0;
+        }
         function init(){
             canvas.width=window.innerWidth;canvas.height=window.innerHeight;
             W=canvas.width;H=canvas.height;
             cols=Math.floor(W/CELL);rows=Math.floor(H/CELL);
             ctx.fillStyle='#0a0a0f';ctx.fillRect(0,0,W,H);
-            grid=new Array(cols).fill(0);grid[Math.floor(cols/2)]=1;row=0;
+            seed();
         }
         function step(){
-            if(row>=rows){ctx.fillStyle='rgba(10,10,15,0.06)';ctx.fillRect(0,0,W,H);grid=new Array(cols).fill(0);grid[Math.floor(cols/2)]=1;row=0;return;}
-            const next=new Array(cols).fill(0);
-            const y=row*CELL;
-            for(let i=0;i<cols;i++){
-                const l=grid[(i-1+cols)%cols],c=grid[i],r=grid[(i+1)%cols];
-                next[i]=result(l,c,r);
-                if(grid[i]===1){
-                    const p=row/rows;
-                    const rv=Math.round(110+(167-110)*p),gv=Math.round(231+(139-231)*p);
-                    ctx.fillStyle=`rgba(${rv},${gv},247,0.18)`;
-                    ctx.fillRect(i*CELL,y,CELL-0.5,CELL-0.5);
+            const next=new Uint8Array(cols*rows);
+            let alive=0;
+            for(let y=0;y<rows;y++){
+                const yu=((y-1+rows)%rows)*cols, yc=y*cols, yd=((y+1)%rows)*cols;
+                for(let x=0;x<cols;x++){
+                    const xl=(x-1+cols)%cols, xr=(x+1)%cols;
+                    const n=grid[yu+xl]+grid[yu+x]+grid[yu+xr]
+                           +grid[yc+xl]           +grid[yc+xr]
+                           +grid[yd+xl]+grid[yd+x]+grid[yd+xr];
+                    const cell=grid[yc+x];
+                    next[yc+x]=(cell===1&&(n===2||n===3))||(cell===0&&n===3)?1:0;
+                    alive+=next[yc+x];
                 }
             }
-            grid=next;row++;
+            grid=next;gen++;
+            if(gen>=RESEED_EVERY||alive<cols*rows*0.01) seed();
+        }
+        function draw(){
+            ctx.fillStyle='rgba(10,10,15,0.32)';ctx.fillRect(0,0,W,H);
+            for(let y=0;y<rows;y++){
+                const p=y/rows;
+                const rv=Math.round(110+(167-110)*p),gv=Math.round(231+(139-231)*p);
+                ctx.fillStyle=`rgba(${rv},${gv},247,0.16)`;
+                for(let x=0;x<cols;x++){
+                    if(grid[y*cols+x]) ctx.fillRect(x*CELL,y*CELL,CELL-1,CELL-1);
+                }
+            }
         }
         let last=0;
-        function frame(ts){if(ts-last>22){step();last=ts;}requestAnimationFrame(frame);}
+        function frame(ts){if(ts-last>120){step();draw();last=ts;}requestAnimationFrame(frame);}
         window.addEventListener('resize',init);init();requestAnimationFrame(frame);
     })();
     function updateTime(){const el=document.getElementById('current-time');if(el)el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});}
