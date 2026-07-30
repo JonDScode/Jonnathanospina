@@ -222,6 +222,14 @@ const TRANSLATIONS = {
     fr: 'Avis Google à partir d\'audio : le client scanne un QR, enregistre son avis et reçoit un texte d\'avis peaufiné prêt à publier. Whisper + Llama via Groq, multi-tenant, déployé avec Docker et en phase de validation utilisateurs.',
   },
 
+  'projects.p7.type': { es:'Machine Learning · Finanzas', en:'Machine Learning · Finance', pt:'Machine Learning · Finanças', fr:'Machine Learning · Finance' },
+  'projects.p7.desc': {
+    es: 'Scoring de riesgo crediticio de principio a fin: XGBoost sobre 307.000 préstamos reales de Home Credit (AUC 0.78), explicabilidad SHAP con reason codes que excluyen atributos protegidos, comparativa con Deep Learning y API de scoring con FastAPI + Docker.',
+    en: 'End-to-end credit risk scoring: XGBoost on 307,000 real Home Credit loans (AUC 0.78), SHAP explainability with reason codes that exclude protected attributes, a Deep Learning comparison and a scoring API with FastAPI + Docker.',
+    pt: 'Scoring de risco de crédito de ponta a ponta: XGBoost sobre 307.000 empréstimos reais da Home Credit (AUC 0.78), explicabilidade SHAP com reason codes que excluem atributos protegidos, comparativa com Deep Learning e API de scoring com FastAPI + Docker.',
+    fr: 'Scoring de risque de crédit de bout en bout : XGBoost sur 307 000 prêts réels Home Credit (AUC 0.78), explicabilité SHAP avec des reason codes excluant les attributs protégés, comparaison Deep Learning et API de scoring FastAPI + Docker.',
+  },
+
   /* ── BLOG — header ── */
   'blog.label':         { es:'// blog.posts[]',  en:'// blog.posts[]',  pt:'// blog.posts[]',  fr:'// blog.posts[]'  },
   'blog.title':         { es:'Blog',              en:'Blog',              pt:'Blog',              fr:'Blog'              },

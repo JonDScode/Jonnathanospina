@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Risk Lab: scoring bancario explicable, de los datos crudos a la API — Jonnathan Ospina</title>
+    <meta name="description" content="Cómo construí un sistema de scoring de crédito completo — XGBoost sobre 307.000 préstamos, reason codes con SHAP, contrato de fairness testeado y API en Docker — y las decisiones que lo hacen defendible ante un comité de riesgo.">
+    <meta name="author" content="Jonnathan Ospina Montalvo">
+    <meta name="theme-color" content="#0a0a0f">
+    <script>(function(){try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+    <link rel="canonical" href="https://www.jonnathanospina.com/pages/blog/credit-risk-lab.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.jonnathanospina.com/pages/blog/credit-risk-lab.html">
+    <meta property="og:title" content="Credit Risk Lab: scoring bancario explicable, de los datos crudos a la API">
+    <meta property="og:description" content="Cómo construí un sistema de scoring de crédito completo — XGBoost sobre 307.000 préstamos, reason codes con SHAP, contrato de fairness testeado y API en Docker — y las decisiones que lo hacen defendible ante un comité de riesgo.">
+    <meta property="og:image" content="https://www.jonnathanospina.com/assets/og-image.png">
+    <meta property="og:locale" content="es_ES">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../CSS/design-system.css">
+    <style>
+        .main-container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 7rem 2rem 5rem;
+            position: relative;
+            z-index: 10;
+        }
+        .post-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+        .post-header-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+        .post-header-meta .cat { color: var(--accent2); }
+        .post-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+        }
+        .post-content { color: var(--text); font-size: 0.97rem; line-height: 1.85; }
+        .post-content h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.05rem;
+            color: var(--accent);
+            margin: 2.5rem 0 1rem;
+            letter-spacing: 0.02em;
+        }
+        .post-content h3 { font-size: 1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+        .post-content p { margin-bottom: 1.2rem; color: var(--text-soft); }
+        .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(110,231,247,0.3); }
+        .post-content a:hover { border-bottom-color: var(--accent); }
+        .post-content ul, .post-content ol { margin: 0 0 1.2rem 1.4rem; color: var(--text-soft); }
+        .post-content li { margin-bottom: 0.4rem; }
+        .post-content code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            padding: 0.1em 0.4em;
+            color: var(--accent);
+        }
+        .post-content pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin-bottom: 1.4rem;
+        }
+        .post-content pre code { background: none; border: none; padding: 0; color: var(--text-soft); font-size: 0.82rem; }
+        .post-content blockquote {
+            border-left: 3px solid var(--accent2);
+            padding: 0.2rem 0 0.2rem 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--muted);
+        }
+        .post-content table { border-collapse: collapse; margin-bottom: 1.4rem; width: 100%; font-size: 0.88rem; }
+        .post-content th, .post-content td { border: 1px solid var(--border); padding: 0.5rem 0.8rem; text-align: left; }
+        .post-content th { background: var(--surface); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); }
+        .post-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .back-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.9rem;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .back-link:hover { color: var(--accent); border-color: rgba(110, 231, 247, 0.3); }
+        @media (max-width: 768px) { .main-container { padding: 6rem 1.2rem 4rem; } }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="nav-container">
+        <nav class="navbar">
+            <a href="../../index.html" class="nav-logo">jonnathan.ospina</a>
+            <div class="nav-links">
+                <a href="../../index.html" class="nav-btn" data-i18n="nav.home">Inicio</a>
+                <a href="../cv.html" class="nav-btn" data-i18n="nav.cv">CV</a>
+                <a href="../projects.html" class="nav-btn" data-i18n="nav.projects">Proyectos</a>
+                <a href="../blog.html" class="nav-btn active" data-i18n="nav.blog">Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <header class="post-header">
+            <div class="post-header-meta">
+                <span>2026-07-30</span>
+                <span class="cat">Machine Learning</span>
+                <span>~3 min</span>
+            </div>
+            <h1>Credit Risk Lab: scoring bancario explicable, de los datos crudos a la API</h1>
+        </header>
+
+        <article class="post-content">
+<p>El scoring de crédito es el problema de machine learning más maduro y regulado de la banca. Un modelo que predice bien no basta: la normativa europea (EBA, AI Act) exige poder <strong>explicar cada decisión individual</strong>. <a href="https://github.com/JonDScode/credit-risk-lab">Credit Risk Lab</a> es mi respuesta completa a ese problema, construida en cinco fases que se pueden leer commit a commit.</p>
+<h2 id="baseline-honesto-antes-que-modelo-espectacular">Baseline honesto antes que modelo espectacular</h2>
+<p>Empecé con 30.000 clientes reales (UCI) y dos modelos: una regresión logística — el estándar interpretable del sector — y XGBoost. Las métricas son las de la casa: además del ROC AUC, el <strong>KS statistic</strong> (la métrica clásica de scorecards) y el Brier score para calibración.</p>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>ROC AUC</th>
+<th>KS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regresión logística</td>
+<td>0.708</td>
+<td>0.364</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.780</td>
+<td>0.429</td>
+</tr>
+</tbody>
+</table>
+<p>Un KS por encima de 0.4 es territorio de scorecard fuerte. Pero el número no es lo interesante — lo interesante es lo que viene después.</p>
+<h2 id="reason-codes-explicar-sin-llm-a-proposito">Reason codes: explicar sin LLM, a propósito</h2>
+<p>Cada scoring se traduce a motivos legibles con SHAP values:</p>
+<pre><code class="language-json">{
+  &quot;p_default&quot;: 0.87,
+  &quot;reason_codes&quot;: [
+    &quot;Estado de pago del último mes: 2 mes(es) de retraso&quot;,
+    &quot;Importe facturado el último mes con patrón de uso atípico&quot;
+  ]
+}
+</code></pre>
+<p>Dos decisiones de diseño que defendería en cualquier comité:</p>
+<ol>
+<li><strong>Los reason codes son deterministas</strong> — plantillas sobre los SHAP values, no texto generado por un LLM. Una explicación de denegación debe ser reproducible ante un regulador: mismo input, misma explicación, siempre.</li>
+<li><strong>La dirección se calcula, no se asume.</strong> Mi primera versión decía "facturación elevada" a un cliente con 2.500 NT$ de facturación — un SHAP positivo puede venir tanto de facturación alta como de una cuenta casi inactiva. Ahora cada razón se contrasta con la mediana de la cartera.</li>
+</ol>
+<p>Y un contrato de fairness convertido en test automatizado: los atributos protegidos o sensibles (sexo, edad, estado civil, educación) <strong>nunca</strong> aparecen como motivo de denegación. Hay un test en CI que falla si eso cambia.</p>
+<h2 id="deep-learning-probado-y-descartado-con-datos">Deep Learning, probado y descartado con datos</h2>
+<p>Entrené un MLP en PyTorch con el mismo split y las mismas métricas: AUC 0.771 contra el 0.780 de XGBoost, y bastante peor calibrado. Es el resultado que documenta la literatura — en datos tabulares de este tamaño, el gradient boosting sigue ganando. Elegir XGBoost no fue una preferencia: fue una medición.</p>
+<h2 id="la-liga-grande-home-credit">La liga grande: Home Credit</h2>
+<p>La última fase migra el sistema al benchmark estándar del sector: <strong>307.000 solicitudes reales en 7 tablas relacionales</strong> — buró externo, créditos previos, pago de cuotas, saldos mensuales. El trabajo duro es el feature engineering: ~80 features agregadas con lectura de negocio (ratios de capacidad de pago, tasa de aprobación histórica, retraso medio real en cuotas, utilización de tarjeta).</p>
+<p>Resultado: <strong>AUC 0.783</strong> con un modelo único e interpretable — los ganadores de la competición de Kaggle rondaron 0.80 con ensembles masivos. Y el sanity check más importante: las features dominantes (scores de buró, utilización de tarjeta, retrasos en cuotas) son exactamente las que un analista de riesgo predeciría. El modelo aprende lo que el negocio ya sabe — y lo cuantifica.</p>
+<h2 id="cierre">Cierre</h2>
+<p>Todo el sistema termina en una API FastAPI dockerizada con un endpoint <code>/score</code> que devuelve probabilidad, banda de riesgo y reason codes, más una demo interactiva en Streamlit. El código completo, commit a commit, está en <a href="https://github.com/JonDScode/credit-risk-lab">github.com/JonDScode/credit-risk-lab</a>.</p>
+        </article>
+
+        <footer class="post-footer">
+            <a href="../blog.html" class="back-link">&larr; blog</a>
+        </footer>
+    </main>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <div class="status-dot"></div>
+            <span>online</span>
+        </div>
+        <div class="status-item">
+            <span>Rule 30 · autómata celular</span>
+        </div>
+        <div class="status-item">
+            <span id="current-time"></span>
+        </div>
+    </div>
+
+    <!-- Analytics: crea la cuenta en https://www.goatcounter.com con el código "jonnathanospina" y descomenta -->
+    <!-- <script data-goatcounter="https://jonnathanospina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
+    <script src="../../JS/i18n.js"></script>
+    <script src="../../JS/theme.js"></script>
+    <script>
+    (function(){
+        const canvas=document.getElementById('bg-canvas');
+        const ctx=canvas.getContext('2d');
+        let W,H,cols,rows,grid=[],row=0;
+        const CELL=5,RULE=30;
+        function result(l,c,r){return(RULE>>((l<<2)|(c<<1)|r))&1;}
+        function init(){
+            canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+            W=canvas.width;H=canvas.height;
+            cols=Math.floor(W/CELL);rows=Math.floor(H/CELL);
+            ctx.fillStyle='#0a0a0f';ctx.fillRect(0,0,W,H);
+            grid=new Array(cols).fill(0);grid[Math.floor(cols/2)]=1;row=0;
+        }
+        function step(){
+            if(row>=rows){ctx.fillStyle='rgba(10,10,15,0.06)';ctx.fillRect(0,0,W,H);grid=new Array(cols).fill(0);grid[Math.floor(cols/2)]=1;row=0;return;}
+            const next=new Array(cols).fill(0);
+            const y=row*CELL;
+            for(let i=0;i<cols;i++){
+                const l=grid[(i-1+cols)%cols],c=grid[i],r=grid[(i+1)%cols];
+                next[i]=result(l,c,r);
+                if(grid[i]===1){
+                    const p=row/rows;
+                    const rv=Math.round(110+(167-110)*p),gv=Math.round(231+(139-231)*p);
+                    ctx.fillStyle=`rgba(${rv},${gv},247,0.18)`;
+                    ctx.fillRect(i*CELL,y,CELL-0.5,CELL-0.5);
+                }
+            }
+            grid=next;row++;
+        }
+        let last=0;
+        function frame(ts){if(ts-last>22){step();last=ts;}requestAnimationFrame(frame);}
+        window.addEventListener('resize',init);init();requestAnimationFrame(frame);
+    })();
+    function updateTime(){const el=document.getElementById('current-time');if(el)el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});}
+    updateTime();setInterval(updateTime,60000);
+    </script>
+</body>
+</html>
