@@ -22,11 +22,26 @@ Contenido en markdown: encabezados `##`, código, tablas, listas, enlaces…
 
 `title`, `date` y `description` son obligatorios; `category` es opcional.
 
-**Multilenguaje (opcional)**: añade `title_en`, `description_en` (y `_pt`, `_fr`)
-al frontmatter y el switcher de idiomas traducirá el título y la descripción del
-post en el índice y en la cabecera del artículo. El **cuerpo** del post se queda
-en su idioma original — solo se traduce el escaparate. Sin esos campos, todo cae
-al español. El build genera `JS/blog-i18n.js` automáticamente (no editar a mano).
+**Multilenguaje (opcional)**:
+
+- *Título y descripción*: añade `title_en`, `description_en` (y `_pt`, `_fr`) al
+  frontmatter — el switcher los traduce en el índice y en la cabecera del post.
+- *Cuerpo completo*: escribe el post en español y añade después secciones con el
+  cuerpo traducido, separadas por marcadores:
+
+  ```markdown
+  Cuerpo en español...
+
+  <!-- lang:en -->
+  Full body in English...
+
+  <!-- lang:pt -->
+  Corpo em português...
+  ```
+
+  El build genera un bloque por idioma y el visitante ve el de su idioma activo.
+- Los idiomas que falten caen al español automáticamente. El build genera
+  `JS/blog-i18n.js` solo (no editar a mano).
 
 ## Token (una sola vez)
 
