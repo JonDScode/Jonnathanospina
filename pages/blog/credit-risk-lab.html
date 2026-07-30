@@ -126,7 +126,7 @@
             <h1 data-i18n="blog.post.credit-risk-lab.title">Credit Risk Lab: scoring bancario explicable, de los datos crudos a la API</h1>
         </header>
 
-        <article class="post-content">
+        <article class="post-content" data-lang="es">
 <p>El scoring de crédito es el problema de machine learning más maduro y regulado de la banca. Un modelo que predice bien no basta: la normativa europea (EBA, AI Act) exige poder <strong>explicar cada decisión individual</strong>. <a href="https://github.com/JonDScode/credit-risk-lab">Credit Risk Lab</a> es mi respuesta completa a ese problema, construida en cinco fases que se pueden leer commit a commit.</p>
 <h2 id="baseline-honesto-antes-que-modelo-espectacular">Baseline honesto antes que modelo espectacular</h2>
 <p>Empecé con 30.000 clientes reales (UCI) y dos modelos: una regresión logística — el estándar interpretable del sector — y XGBoost. Las métricas son las de la casa: además del ROC AUC, el <strong>KS statistic</strong> (la métrica clásica de scorecards) y el Brier score para calibración.</p>
@@ -176,6 +176,156 @@
 <h2 id="cierre">Cierre</h2>
 <p>Todo el sistema termina en una API FastAPI dockerizada con un endpoint <code>/score</code> que devuelve probabilidad, banda de riesgo y reason codes, más una demo interactiva en Streamlit. El código completo, commit a commit, está en <a href="https://github.com/JonDScode/credit-risk-lab">github.com/JonDScode/credit-risk-lab</a>.</p>
         </article>
+        <article class="post-content" data-lang="en" style="display:none">
+<p>Credit scoring is the most mature and regulated machine learning problem in banking. A model that predicts well is not enough: European regulation (EBA, AI Act) requires being able to <strong>explain every individual decision</strong>. <a href="https://github.com/JonDScode/credit-risk-lab">Credit Risk Lab</a> is my complete answer to that problem, built in five phases you can read commit by commit.</p>
+<h2 id="an-honest-baseline-before-a-spectacular-model">An honest baseline before a spectacular model</h2>
+<p>I started with 30,000 real clients (UCI) and two models: a logistic regression — the industry's interpretable standard — and XGBoost. The metrics are the house metrics: besides ROC AUC, the <strong>KS statistic</strong> (the classic scorecard metric) and the Brier score for calibration.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>ROC AUC</th>
+<th>KS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logistic regression</td>
+<td>0.708</td>
+<td>0.364</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.780</td>
+<td>0.429</td>
+</tr>
+</tbody>
+</table>
+<p>A KS above 0.4 is strong-scorecard territory. But the number isn't the interesting part — the interesting part comes next.</p>
+<h2 id="reason-codes-explaining-without-an-llm-on-purpose">Reason codes: explaining without an LLM, on purpose</h2>
+<p>Every score is translated into readable reasons with SHAP values:</p>
+<pre><code class="language-json">{
+  &quot;p_default&quot;: 0.87,
+  &quot;reason_codes&quot;: [
+    &quot;Most recent payment status: 2 month(s) overdue&quot;,
+    &quot;Latest monthly bill amount with atypical usage pattern&quot;
+  ]
+}
+</code></pre>
+<p>Two design decisions I would defend in any committee:</p>
+<ol>
+<li><strong>Reason codes are deterministic</strong> — templates over SHAP values, not LLM-generated text. A denial explanation must be reproducible before a regulator: same input, same explanation, always.</li>
+<li><strong>Direction is computed, not assumed.</strong> My first version told a client with NT$2,500 of billing that their "billing was high" — a positive SHAP can come from high billing or from a nearly inactive account. Now every reason is checked against the portfolio median.</li>
+</ol>
+<p>And a fairness contract turned into an automated test: protected or sensitive attributes (sex, age, marital status, education) <strong>never</strong> appear as a denial reason. There is a CI test that fails if that changes.</p>
+<h2 id="deep-learning-tried-and-ruled-out-with-data">Deep Learning, tried and ruled out with data</h2>
+<p>I trained a PyTorch MLP with the same split and metrics: AUC 0.771 against XGBoost's 0.780, and noticeably worse calibrated. It is the result the literature documents — on tabular data of this size, gradient boosting still wins. Choosing XGBoost was not a preference: it was a measurement.</p>
+<h2 id="the-big-league-home-credit">The big league: Home Credit</h2>
+<p>The final phase migrates the system to the industry's standard benchmark: <strong>307,000 real applications across 7 relational tables</strong> — external bureau, previous loans, installment payments, monthly balances. The hard work is feature engineering: ~80 aggregated features with a business reading (payment capacity ratios, historical approval rate, real average installment delay, card utilization).</p>
+<p>Result: <strong>AUC 0.783</strong> with a single, interpretable model — the Kaggle competition winners reached ~0.80 with massive ensembles. And the most important sanity check: the dominant features (bureau scores, card utilization, installment delays) are exactly what a risk analyst would predict. The model learns what the business already knows — and quantifies it.</p>
+<h2 id="closing">Closing</h2>
+<p>The whole system ends in a Dockerized FastAPI with a <code>/score</code> endpoint returning probability, risk band and reason codes, plus an interactive Streamlit demo. The full code, commit by commit, is at <a href="https://github.com/JonDScode/credit-risk-lab">github.com/JonDScode/credit-risk-lab</a>.</p>
+        </article>
+        <article class="post-content" data-lang="pt" style="display:none">
+<p>O scoring de crédito é o problema de machine learning mais maduro e regulado da banca. Um modelo que prevê bem não chega: a regulação europeia (EBA, AI Act) exige poder <strong>explicar cada decisão individual</strong>. O <a href="https://github.com/JonDScode/credit-risk-lab">Credit Risk Lab</a> é a minha resposta completa a esse problema, construída em cinco fases que se podem ler commit a commit.</p>
+<h2 id="baseline-honesto-antes-de-modelo-espetacular">Baseline honesto antes de modelo espetacular</h2>
+<p>Comecei com 30.000 clientes reais (UCI) e dois modelos: uma regressão logística — o padrão interpretável do setor — e XGBoost. As métricas são as da casa: além do ROC AUC, o <strong>KS statistic</strong> (a métrica clássica de scorecards) e o Brier score para calibração.</p>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>ROC AUC</th>
+<th>KS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regressão logística</td>
+<td>0.708</td>
+<td>0.364</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.780</td>
+<td>0.429</td>
+</tr>
+</tbody>
+</table>
+<p>Um KS acima de 0.4 é território de scorecard forte. Mas o número não é o interessante — o interessante vem a seguir.</p>
+<h2 id="reason-codes-explicar-sem-llm-de-proposito">Reason codes: explicar sem LLM, de propósito</h2>
+<p>Cada scoring traduz-se em motivos legíveis com SHAP values:</p>
+<pre><code class="language-json">{
+  &quot;p_default&quot;: 0.87,
+  &quot;reason_codes&quot;: [
+    &quot;Estado de pagamento do último mês: 2 mês(es) de atraso&quot;,
+    &quot;Montante faturado no último mês com padrão de uso atípico&quot;
+  ]
+}
+</code></pre>
+<p>Duas decisões de design que defenderia em qualquer comité:</p>
+<ol>
+<li><strong>Os reason codes são determinísticos</strong> — templates sobre os SHAP values, não texto gerado por um LLM. Uma explicação de recusa deve ser reproduzível perante um regulador: mesmo input, mesma explicação, sempre.</li>
+<li><strong>A direção calcula-se, não se assume.</strong> A minha primeira versão dizia "faturação elevada" a um cliente com 2.500 NT$ de faturação — um SHAP positivo pode vir tanto de faturação alta como de uma conta quase inativa. Agora cada motivo é contrastado com a mediana da carteira.</li>
+</ol>
+<p>E um contrato de fairness convertido em teste automatizado: os atributos protegidos ou sensíveis (sexo, idade, estado civil, educação) <strong>nunca</strong> aparecem como motivo de recusa. Há um teste em CI que falha se isso mudar.</p>
+<h2 id="deep-learning-testado-e-descartado-com-dados">Deep Learning, testado e descartado com dados</h2>
+<p>Treinei um MLP em PyTorch com o mesmo split e as mesmas métricas: AUC 0.771 contra 0.780 do XGBoost, e bastante pior calibrado. É o resultado que a literatura documenta — em dados tabulares deste tamanho, o gradient boosting continua a ganhar. Escolher XGBoost não foi uma preferência: foi uma medição.</p>
+<h2 id="a-liga-grande-home-credit">A liga grande: Home Credit</h2>
+<p>A última fase migra o sistema para o benchmark padrão do setor: <strong>307.000 pedidos reais em 7 tabelas relacionais</strong> — bureau externo, créditos anteriores, pagamento de prestações, saldos mensais. O trabalho duro é o feature engineering: ~80 features agregadas com leitura de negócio (rácios de capacidade de pagamento, taxa de aprovação histórica, atraso médio real nas prestações, utilização de cartão).</p>
+<p>Resultado: <strong>AUC 0.783</strong> com um modelo único e interpretável — os vencedores da competição do Kaggle rondaram 0.80 com ensembles massivos. E o sanity check mais importante: as features dominantes (scores de bureau, utilização de cartão, atrasos nas prestações) são exatamente as que um analista de risco preveria. O modelo aprende o que o negócio já sabe — e quantifica-o.</p>
+<h2 id="fecho">Fecho</h2>
+<p>Todo o sistema termina numa API FastAPI dockerizada com um endpoint <code>/score</code> que devolve probabilidade, banda de risco e reason codes, mais uma demo interativa em Streamlit. O código completo, commit a commit, está em <a href="https://github.com/JonDScode/credit-risk-lab">github.com/JonDScode/credit-risk-lab</a>.</p>
+        </article>
+        <article class="post-content" data-lang="fr" style="display:none">
+<p>Le scoring de crédit est le problème de machine learning le plus mûr et le plus régulé de la banque. Un modèle qui prédit bien ne suffit pas : la réglementation européenne (EBA, AI Act) exige de pouvoir <strong>expliquer chaque décision individuelle</strong>. <a href="https://github.com/JonDScode/credit-risk-lab">Credit Risk Lab</a> est ma réponse complète à ce problème, construite en cinq phases lisibles commit par commit.</p>
+<h2 id="une-baseline-honnete-avant-un-modele-spectaculaire">Une baseline honnête avant un modèle spectaculaire</h2>
+<p>J'ai commencé avec 30 000 clients réels (UCI) et deux modèles : une régression logistique — le standard interprétable du secteur — et XGBoost. Les métriques sont celles du métier : outre le ROC AUC, le <strong>KS statistic</strong> (la métrique classique des scorecards) et le Brier score pour la calibration.</p>
+<table>
+<thead>
+<tr>
+<th>Modèle</th>
+<th>ROC AUC</th>
+<th>KS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Régression logistique</td>
+<td>0.708</td>
+<td>0.364</td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td>0.780</td>
+<td>0.429</td>
+</tr>
+</tbody>
+</table>
+<p>Un KS au-dessus de 0.4, c'est le territoire des scorecards solides. Mais le chiffre n'est pas l'intéressant — l'intéressant vient ensuite.</p>
+<h2 id="reason-codes-expliquer-sans-llm-a-dessein">Reason codes : expliquer sans LLM, à dessein</h2>
+<p>Chaque scoring se traduit en motifs lisibles avec les SHAP values :</p>
+<pre><code class="language-json">{
+  &quot;p_default&quot;: 0.87,
+  &quot;reason_codes&quot;: [
+    &quot;Statut de paiement du dernier mois : 2 mois de retard&quot;,
+    &quot;Montant facturé du dernier mois avec un profil d'usage atypique&quot;
+  ]
+}
+</code></pre>
+<p>Deux décisions de conception que je défendrais devant n'importe quel comité :</p>
+<ol>
+<li><strong>Les reason codes sont déterministes</strong> — des templates sur les SHAP values, pas du texte généré par un LLM. Une explication de refus doit être reproductible devant un régulateur : même entrée, même explication, toujours.</li>
+<li><strong>La direction se calcule, ne se suppose pas.</strong> Ma première version disait "facturation élevée" à un client avec 2 500 NT$ de facturation — un SHAP positif peut venir d'une facturation élevée comme d'un compte quasi inactif. Désormais chaque motif est confronté à la médiane du portefeuille.</li>
+</ol>
+<p>Et un contrat de fairness transformé en test automatisé : les attributs protégés ou sensibles (sexe, âge, état civil, éducation) n'apparaissent <strong>jamais</strong> comme motif de refus. Un test en CI échoue si cela change.</p>
+<h2 id="le-deep-learning-essaye-et-ecarte-avec-des-donnees">Le Deep Learning, essayé et écarté avec des données</h2>
+<p>J'ai entraîné un MLP en PyTorch avec le même split et les mêmes métriques : AUC 0.771 contre 0.780 pour XGBoost, et nettement moins bien calibré. C'est le résultat que documente la littérature — sur du tabulaire de cette taille, le gradient boosting gagne encore. Choisir XGBoost n'était pas une préférence : c'était une mesure.</p>
+<h2 id="la-cour-des-grands-home-credit">La cour des grands : Home Credit</h2>
+<p>La dernière phase migre le système vers le benchmark standard du secteur : <strong>307 000 demandes réelles sur 7 tables relationnelles</strong> — bureau externe, crédits antérieurs, paiements d'échéances, soldes mensuels. Le vrai travail, c'est le feature engineering : ~80 features agrégées avec une lecture métier (ratios de capacité de paiement, taux d'approbation historique, retard moyen réel des échéances, utilisation de carte).</p>
+<p>Résultat : <strong>AUC 0.783</strong> avec un modèle unique et interprétable — les vainqueurs de la compétition Kaggle ont atteint ~0.80 avec des ensembles massifs. Et le sanity check le plus important : les features dominantes (scores de bureau, utilisation de carte, retards d'échéances) sont exactement celles qu'un analyste risque prédirait. Le modèle apprend ce que le métier sait déjà — et le quantifie.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Tout le système se termine par une API FastAPI dockerisée avec un endpoint <code>/score</code> renvoyant probabilité, bande de risque et reason codes, plus une démo interactive Streamlit. Le code complet, commit par commit, est sur <a href="https://github.com/JonDScode/credit-risk-lab">github.com/JonDScode/credit-risk-lab</a>.</p>
+        </article>
 
         <footer class="post-footer">
             <a href="../blog.html" class="back-link">&larr; blog</a>
@@ -188,7 +338,7 @@
             <span>online</span>
         </div>
         <div class="status-item">
-            <span>Conway · juego de la vida</span>
+            <span data-i18n="status.conway">Conway · juego de la vida</span>
         </div>
         <div class="status-item">
             <span id="current-time"></span>
@@ -254,6 +404,19 @@
     })();
     function updateTime(){const el=document.getElementById('current-time');if(el)el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});}
     updateTime();setInterval(updateTime,60000);
+
+    /* Cuerpo del post por idioma: muestra el del idioma activo, con fallback a es */
+    function showPostBody(){
+        var lang=document.documentElement.lang||'es';
+        var divs=document.querySelectorAll('.post-content[data-lang]');
+        if(!divs.length)return;
+        var target=null;
+        divs.forEach(function(d){if(d.getAttribute('data-lang')===lang)target=d;});
+        if(!target)divs.forEach(function(d){if(d.getAttribute('data-lang')==='es')target=d;});
+        divs.forEach(function(d){d.style.display=(d===target)?'':'none';});
+    }
+    window.addEventListener('langchange',showPostBody);
+    document.addEventListener('DOMContentLoaded',showPostBody);
     </script>
 </body>
 </html>

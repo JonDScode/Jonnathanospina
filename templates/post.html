@@ -126,9 +126,7 @@
             <h1 data-i18n="blog.post.{{SLUG}}.title">{{TITLE}}</h1>
         </header>
 
-        <article class="post-content">
-{{CONTENT}}
-        </article>
+{{CONTENT_BLOCKS}}
 
         <footer class="post-footer">
             <a href="../blog.html" class="back-link">&larr; blog</a>
@@ -141,7 +139,7 @@
             <span>online</span>
         </div>
         <div class="status-item">
-            <span>Conway · juego de la vida</span>
+            <span data-i18n="status.conway">Conway · juego de la vida</span>
         </div>
         <div class="status-item">
             <span id="current-time"></span>
@@ -207,6 +205,19 @@
     })();
     function updateTime(){const el=document.getElementById('current-time');if(el)el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});}
     updateTime();setInterval(updateTime,60000);
+
+    /* Cuerpo del post por idioma: muestra el del idioma activo, con fallback a es */
+    function showPostBody(){
+        var lang=document.documentElement.lang||'es';
+        var divs=document.querySelectorAll('.post-content[data-lang]');
+        if(!divs.length)return;
+        var target=null;
+        divs.forEach(function(d){if(d.getAttribute('data-lang')===lang)target=d;});
+        if(!target)divs.forEach(function(d){if(d.getAttribute('data-lang')==='es')target=d;});
+        divs.forEach(function(d){d.style.display=(d===target)?'':'none';});
+    }
+    window.addEventListener('langchange',showPostBody);
+    document.addEventListener('DOMContentLoaded',showPostBody);
     </script>
 </body>
 </html>

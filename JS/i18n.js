@@ -221,6 +221,10 @@ const TRANSLATIONS = {
     fr: 'Plateforme de renseignement géospatial en temps réel sur la base open source OSIRIS : carte WebGL avec des milliers d\'entités en direct (trafic aérien et maritime, séismes, sanctions OFAC, événements GDELT), scoring de risque pays et analyse par IA. Spécialisation maritime propre en cours : chokepoints, AIS et risque de chaîne d\'approvisionnement.',
   },
 
+  /* ── STATUS BAR ── */
+  'status.field':  { es:'∇f · campo vectorial',      en:'∇f · vector field',      pt:'∇f · campo vetorial',    fr:'∇f · champ vectoriel'   },
+  'status.conway': { es:'Conway · juego de la vida', en:'Conway · game of life',  pt:'Conway · jogo da vida',  fr:'Conway · jeu de la vie' },
+
   /* ── BLOG — header ── */
   'blog.label':         { es:'// blog.posts[]',  en:'// blog.posts[]',  pt:'// blog.posts[]',  fr:'// blog.posts[]'  },
   'blog.title':         { es:'Blog',              en:'Blog',              pt:'Blog',              fr:'Blog'              },
@@ -263,6 +267,8 @@ function applyLang(lang) {
     el.innerHTML = val;
   });
   document.documentElement.lang = lang;
+  // Aviso para contenido que no va por data-i18n (p.ej. cuerpos de posts por idioma)
+  window.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
 }
 
 function updateSwitcher(activeLang) {

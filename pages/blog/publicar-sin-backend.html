@@ -126,7 +126,7 @@
             <h1 data-i18n="blog.post.publicar-sin-backend.title">Publicar en un blog estático sin backend: GitHub como API</h1>
         </header>
 
-        <article class="post-content">
+        <article class="post-content" data-lang="es">
 <p>Este sitio vive en GitHub Pages: hosting estático, gratuito y sin servidor que mantener. La pega aparente es que "no se puede publicar contenido dinámicamente". Este post existe para demostrar lo contrario — se publicó exactamente con el mecanismo que describe.</p>
 <h2 id="la-idea-el-repositorio-es-la-api">La idea: el repositorio es la API</h2>
 <p>No necesito un backend porque GitHub ya me da uno:</p>
@@ -171,6 +171,141 @@
 <p>Escribir desde donde sea: un editor local y <code>git push</code>, la web de GitHub desde el móvil, o una aplicación propia con su backend que llame a la API. El pipeline no distingue — todo termina en un commit, y un commit termina en un post publicado.</p>
 <p>El mismo patrón sirve para más cosas: este sitio también regenera el PDF del CV con Chrome headless cada vez que cambia el CV web. Una sola fuente de verdad, cero servidores.</p>
         </article>
+        <article class="post-content" data-lang="en" style="display:none">
+<p>This site lives on GitHub Pages: static, free hosting with no server to maintain. The apparent catch is that "you can't publish content dynamically". This post exists to prove otherwise — it was published with the very mechanism it describes.</p>
+<h2 id="the-idea-the-repository-is-the-api">The idea: the repository is the API</h2>
+<p>I don't need a backend because GitHub already gives me one:</p>
+<ol>
+<li><strong>Content is markdown files</strong> in <code>blog/posts/</code>, with YAML frontmatter (title, date, description, category).</li>
+<li><strong>A GitHub Action</strong> fires when a new post arrives: it converts it to HTML with the site's template, regenerates the blog index and the sitemap, and commits the result.</li>
+<li><strong>GitHub Pages</strong> redeploys automatically. The site stays 100% static.</li>
+</ol>
+<p>The "publish button" of any external application boils down to one call to the GitHub REST API:</p>
+<pre><code class="language-bash">curl -X PUT \
+  -H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  https://api.github.com/repos/JonDScode/Jonnathanospina/contents/blog/posts/my-post.md \
+  -d '{&quot;message&quot;: &quot;New post&quot;, &quot;content&quot;: &quot;&lt;markdown in base64&gt;&quot;}'
+</code></pre>
+<p>The token is <em>fine-grained</em>: it can only write content to this repository. If it leaks, the blast radius is a blog, not an account.</p>
+<h2 id="why-not-a-cms-or-a-server">Why not a CMS or a server</h2>
+<table>
+<thead>
+<tr>
+<th>Alternative</th>
+<th>Hidden cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Headless CMS (Decap, Contentful)</td>
+<td>OAuth gateway or paid SaaS — a backend in disguise</td>
+</tr>
+<tr>
+<td>Own server with an API</td>
+<td>Maintenance, outages, certificates, one more service to watch</td>
+</tr>
+<tr>
+<td><code>fetch</code> to a backend from the browser</td>
+<td>The site breaks whenever the server goes down</td>
+</tr>
+</tbody>
+</table>
+<p>The Actions version has none of those costs: if GitHub is down, the world has bigger problems than my blog.</p>
+<h2 id="what-this-enables">What this enables</h2>
+<p>Writing from anywhere: a local editor and <code>git push</code>, the GitHub web UI from a phone, or an application of your own with its backend calling the API. The pipeline doesn't care — everything ends in a commit, and a commit ends in a published post.</p>
+<p>The same pattern serves other things: this site also regenerates the CV PDF with headless Chrome every time the web CV changes. One source of truth, zero servers.</p>
+        </article>
+        <article class="post-content" data-lang="pt" style="display:none">
+<p>Este site vive no GitHub Pages: hosting estático, gratuito e sem servidor para manter. O aparente problema é que "não se pode publicar conteúdo dinamicamente". Este post existe para provar o contrário — foi publicado exatamente com o mecanismo que descreve.</p>
+<h2 id="a-ideia-o-repositorio-e-a-api">A ideia: o repositório é a API</h2>
+<p>Não preciso de um backend porque o GitHub já me dá um:</p>
+<ol>
+<li><strong>O conteúdo são ficheiros markdown</strong> em <code>blog/posts/</code>, com frontmatter YAML (título, data, descrição, categoria).</li>
+<li><strong>Uma GitHub Action</strong> dispara quando chega um post novo: converte-o em HTML com o template do site, regenera o índice do blog e o sitemap, e faz commit do resultado.</li>
+<li><strong>O GitHub Pages</strong> faz redeploy automaticamente. O site continua 100% estático.</li>
+</ol>
+<p>O "botão publicar" de qualquer aplicação externa reduz-se a uma chamada à API REST do GitHub:</p>
+<pre><code class="language-bash">curl -X PUT \
+  -H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  https://api.github.com/repos/JonDScode/Jonnathanospina/contents/blog/posts/meu-post.md \
+  -d '{&quot;message&quot;: &quot;Novo post&quot;, &quot;content&quot;: &quot;&lt;markdown em base64&gt;&quot;}'
+</code></pre>
+<p>O token é <em>fine-grained</em>: só pode escrever conteúdo neste repositório. Se vazar, o raio de dano é um blog, não uma conta.</p>
+<h2 id="porque-nao-um-cms-ou-um-servidor">Porquê não um CMS ou um servidor</h2>
+<table>
+<thead>
+<tr>
+<th>Alternativa</th>
+<th>Custo oculto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMS headless (Decap, Contentful)</td>
+<td>Gateway OAuth ou SaaS pago — um backend disfarçado</td>
+</tr>
+<tr>
+<td>Servidor próprio com API</td>
+<td>Manutenção, quedas, certificados, mais um serviço para vigiar</td>
+</tr>
+<tr>
+<td><code>fetch</code> a um backend a partir do navegador</td>
+<td>O site deixa de funcionar quando o servidor cai</td>
+</tr>
+</tbody>
+</table>
+<p>A versão com Actions não tem nenhum desses custos: se o GitHub estiver em baixo, o mundo tem problemas maiores do que o meu blog.</p>
+<h2 id="o-que-isto-permite">O que isto permite</h2>
+<p>Escrever de onde for: um editor local e <code>git push</code>, a web do GitHub no telemóvel, ou uma aplicação própria com o seu backend a chamar a API. O pipeline não distingue — tudo acaba num commit, e um commit acaba num post publicado.</p>
+<p>O mesmo padrão serve para mais coisas: este site também regenera o PDF do CV com Chrome headless sempre que o CV web muda. Uma única fonte de verdade, zero servidores.</p>
+        </article>
+        <article class="post-content" data-lang="fr" style="display:none">
+<p>Ce site vit sur GitHub Pages : hébergement statique, gratuit, sans serveur à maintenir. Le piège apparent : "on ne peut pas publier de contenu dynamiquement". Ce billet existe pour prouver le contraire — il a été publié exactement avec le mécanisme qu'il décrit.</p>
+<h2 id="lidee-le-depot-est-lapi">L'idée : le dépôt est l'API</h2>
+<p>Je n'ai pas besoin de backend parce que GitHub m'en donne déjà un :</p>
+<ol>
+<li><strong>Le contenu, ce sont des fichiers markdown</strong> dans <code>blog/posts/</code>, avec un frontmatter YAML (titre, date, description, catégorie).</li>
+<li><strong>Une GitHub Action</strong> se déclenche à l'arrivée d'un nouveau billet : elle le convertit en HTML avec le template du site, régénère l'index du blog et le sitemap, et committe le résultat.</li>
+<li><strong>GitHub Pages</strong> redéploie automatiquement. Le site reste 100 % statique.</li>
+</ol>
+<p>Le "bouton publier" de n'importe quelle application externe se réduit à un appel à l'API REST de GitHub :</p>
+<pre><code class="language-bash">curl -X PUT \
+  -H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \
+  -H &quot;Accept: application/vnd.github+json&quot; \
+  https://api.github.com/repos/JonDScode/Jonnathanospina/contents/blog/posts/mon-billet.md \
+  -d '{&quot;message&quot;: &quot;Nouveau billet&quot;, &quot;content&quot;: &quot;&lt;markdown en base64&gt;&quot;}'
+</code></pre>
+<p>Le token est <em>fine-grained</em> : il ne peut écrire que du contenu dans ce dépôt. S'il fuit, le rayon d'impact est un blog, pas un compte.</p>
+<h2 id="pourquoi-pas-un-cms-ou-un-serveur">Pourquoi pas un CMS ou un serveur</h2>
+<table>
+<thead>
+<tr>
+<th>Alternative</th>
+<th>Coût caché</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMS headless (Decap, Contentful)</td>
+<td>Passerelle OAuth ou SaaS payant — un backend déguisé</td>
+</tr>
+<tr>
+<td>Serveur propre avec API</td>
+<td>Maintenance, pannes, certificats, un service de plus à surveiller</td>
+</tr>
+<tr>
+<td><code>fetch</code> vers un backend depuis le navigateur</td>
+<td>Le site cesse de fonctionner quand le serveur tombe</td>
+</tr>
+</tbody>
+</table>
+<p>La version avec Actions n'a aucun de ces coûts : si GitHub est en panne, le monde a de plus gros problèmes que mon blog.</p>
+<h2 id="ce-que-cela-permet">Ce que cela permet</h2>
+<p>Écrire de n'importe où : un éditeur local et <code>git push</code>, l'interface web de GitHub depuis un téléphone, ou une application à soi avec son backend qui appelle l'API. Le pipeline ne fait pas la différence — tout finit en commit, et un commit finit en billet publié.</p>
+<p>Le même motif sert à autre chose : ce site régénère aussi le PDF du CV avec Chrome headless à chaque changement du CV web. Une seule source de vérité, zéro serveur.</p>
+        </article>
 
         <footer class="post-footer">
             <a href="../blog.html" class="back-link">&larr; blog</a>
@@ -183,7 +318,7 @@
             <span>online</span>
         </div>
         <div class="status-item">
-            <span>Conway · juego de la vida</span>
+            <span data-i18n="status.conway">Conway · juego de la vida</span>
         </div>
         <div class="status-item">
             <span id="current-time"></span>
@@ -249,6 +384,19 @@
     })();
     function updateTime(){const el=document.getElementById('current-time');if(el)el.textContent=new Date().toLocaleTimeString('es-ES',{hour12:false,hour:'2-digit',minute:'2-digit'});}
     updateTime();setInterval(updateTime,60000);
+
+    /* Cuerpo del post por idioma: muestra el del idioma activo, con fallback a es */
+    function showPostBody(){
+        var lang=document.documentElement.lang||'es';
+        var divs=document.querySelectorAll('.post-content[data-lang]');
+        if(!divs.length)return;
+        var target=null;
+        divs.forEach(function(d){if(d.getAttribute('data-lang')===lang)target=d;});
+        if(!target)divs.forEach(function(d){if(d.getAttribute('data-lang')==='es')target=d;});
+        divs.forEach(function(d){d.style.display=(d===target)?'':'none';});
+    }
+    window.addEventListener('langchange',showPostBody);
+    document.addEventListener('DOMContentLoaded',showPostBody);
     </script>
 </body>
 </html>

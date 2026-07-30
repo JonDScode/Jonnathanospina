@@ -41,10 +41,24 @@ def parse_post(path: Path) -> dict:
         if field not in meta:
             sys.exit(f"ERROR: {path.name} sin campo obligatorio '{field}'")
     slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", path.stem)
-    MD.reset()
-    words = len(re.findall(r"\w+", body))
+
+    # Cuerpos por idioma: el texto antes del primer marcador <!-- lang:xx --> es el
+    # español; cada marcador abre la versión en ese idioma. Los idiomas ausentes
+    # caen al español en el navegador.
+    chunks = re.split(r"<!--\s*lang:(\w{2})\s*-->", body)
+    bodies = {"es": chunks[0].strip()}
+    for lang, text in zip(chunks[1::2], chunks[2::2]):
+        if lang not in LANGS:
+            sys.exit(f"ERROR: {path.name} tiene un marcador de idioma desconocido: {lang}")
+        bodies[lang] = text.strip()
+
+    html_bodies = {}
+    for lang, text in bodies.items():
+        MD.reset()
+        html_bodies[lang] = MD.convert(text)
+
+    words = len(re.findall(r"\w+", bodies["es"]))
     # Traducciones opcionales de título/descripción: title_en, description_fr, ...
-    # (el cuerpo del post se queda en su idioma original; solo se traduce el escaparate)
     i18n = {}
     for field in ("title", "description"):
         i18n[field] = {"es": str(meta[field])}
@@ -57,7 +71,7 @@ def parse_post(path: Path) -> dict:
         "date": str(meta["date"]),
         "description": str(meta["description"]),
         "category": str(meta.get("category", "IA & Datos")),
-        "html": MD.convert(body),
+        "html_bodies": html_bodies,
         "minutes": max(1, round(words / 200)),
         "i18n": i18n,
     }
@@ -68,7 +82,19 @@ def render_post(post: dict, template: str) -> str:
     for key in ("slug", "title", "date", "description", "category"):
         out = out.replace("{{" + key.upper() + "}}", post[key])
     out = out.replace("{{MINUTES}}", str(post["minutes"]))
-    out = out.replace("{{CONTENT}}", post["html"])
+    # Un <article> por idioma; el español visible por defecto, el resto oculto
+    # (JS del template muestra el del idioma activo, con fallback a es).
+    blocks = []
+    for lang in LANGS:
+        if lang not in post["html_bodies"]:
+            continue
+        hidden = "" if lang == "es" else ' style="display:none"'
+        blocks.append(
+            f'        <article class="post-content" data-lang="{lang}"{hidden}>\n'
+            f'{post["html_bodies"][lang]}\n'
+            f"        </article>"
+        )
+    out = out.replace("{{CONTENT_BLOCKS}}", "\n".join(blocks))
     return out
 
 
