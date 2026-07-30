@@ -189,23 +189,6 @@ const TRANSLATIONS = {
     fr: 'Tuteur agentique d\'anglais : agent conversationnel construit sur Claude avec voix hybride (STT/TTS) et app universelle iOS / Android / web. Monorepo TypeScript avec architecture d\'agents.',
   },
 
-  'projects.p3.type': { es:'Data Engineering · Open Data', en:'Data Engineering · Open Data', pt:'Data Engineering · Open Data', fr:'Data Engineering · Open Data' },
-  'projects.p3.desc': {
-    es: 'Librería Python para acceso ágil a datos espaciales y estadísticos de Andalucía: mapas de municipios vía WFS y estadísticas del SIMA en tres líneas de código, con visualización interactiva.',
-    en: 'Python library for quick access to spatial and statistical data of Andalusia: municipality maps via WFS and SIMA statistics in three lines of code, with interactive visualization.',
-    pt: 'Biblioteca Python para acesso ágil a dados espaciais e estatísticos da Andaluzia: mapas de municípios via WFS e estatísticas do SIMA em três linhas de código, com visualização interativa.',
-    fr: 'Bibliothèque Python pour un accès rapide aux données spatiales et statistiques d\'Andalousie : cartes des communes via WFS et statistiques SIMA en trois lignes de code, avec visualisation interactive.',
-  },
-
-  'projects.p4.title': { es:'Flujos de Movilidad Urbana', en:'Urban Mobility Flows', pt:'Fluxos de Mobilidade Urbana', fr:'Flux de Mobilité Urbaine' },
-  'projects.p4.type':  { es:'Data Science · Visualización', en:'Data Science · Visualization', pt:'Data Science · Visualização', fr:'Data Science · Visualisation' },
-  'projects.p4.desc': {
-    es: 'Análisis de flujos de movilidad y pueblos dormitorio en Sevilla y Málaga con datos abiertos del MITMA: pipeline completo de descarga y transformación, y dashboard interactivo en Streamlit.',
-    en: 'Analysis of mobility flows and commuter towns in Seville and Málaga with MITMA open data: full download and transformation pipeline, and an interactive Streamlit dashboard.',
-    pt: 'Análise de fluxos de mobilidade e cidades-dormitório em Sevilha e Málaga com dados abertos do MITMA: pipeline completo de descarga e transformação, e dashboard interativo em Streamlit.',
-    fr: 'Analyse des flux de mobilité et des villes-dortoirs à Séville et Málaga avec les données ouvertes du MITMA : pipeline complet de téléchargement et transformation, et tableau de bord interactif Streamlit.',
-  },
-
   'projects.p5.type': { es:'Deep Learning · Computer Vision', en:'Deep Learning · Computer Vision', pt:'Deep Learning · Computer Vision', fr:'Deep Learning · Computer Vision' },
   'projects.p5.desc': {
     es: 'Detección temprana de incendios en imágenes mediante redes neuronales convolucionales. Proyecto desarrollado en el bootcamp Saturdays AI Madrid (6ª edición, 2023).',

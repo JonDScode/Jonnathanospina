@@ -19,12 +19,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../CSS/design-system.css">
     <style>
+        /* Lienzo sólido entre la animación del canvas y el texto (legibilidad) */
         .main-container {
             max-width: 760px;
-            margin: 0 auto;
-            padding: 7rem 2rem 5rem;
+            margin: 5.5rem auto 3rem;
+            padding: 2.5rem 3rem 3.5rem;
             position: relative;
             z-index: 10;
+            background: var(--bg);
+            border: 1px solid var(--border);
         }
         .post-header { margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
         .post-header-meta {
