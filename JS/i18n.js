@@ -15,10 +15,10 @@ const TRANSLATIONS = {
 
   /* ── INDEX — hero ── */
   'index.subtitle': {
-    es: 'AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agentes',
-    en: 'AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agents',
-    pt: 'AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agentes',
-    fr: 'Ingénieur IA &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agents',
+    es: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agentes &amp; Pipelines',
+    en: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agents &amp; Pipelines',
+    pt: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agentes &amp; Pipelines',
+    fr: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agents &amp; Pipelines',
   },
   'index.cta.projects': { es:'Ver proyectos', en:'View projects', pt:'Ver projetos', fr:'Voir les projets' },
   'index.cta.cv':       { es:'Currículum',    en:'Curriculum',    pt:'Currículo',    fr:'Curriculum'       },
@@ -57,10 +57,10 @@ const TRANSLATIONS = {
   /* ── CV — header ── */
   'cv.label':    { es:'// curriculum_vitae', en:'// curriculum_vitae', pt:'// curriculum_vitae', fr:'// curriculum_vitae' },
   'cv.subtitle': {
-    es: 'AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agentes',
-    en: 'AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agents',
-    pt: 'AI Engineer &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agentes',
-    fr: 'Ingénieur IA &nbsp;·&nbsp; Data Scientist &nbsp;·&nbsp; GenAI &amp; Agents',
+    es: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agentes &amp; Pipelines',
+    en: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agents &amp; Pipelines',
+    pt: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agentes &amp; Pipelines',
+    fr: 'Data &amp; AI Engineer &nbsp;·&nbsp; GenAI, Agents &amp; Pipelines',
   },
   'cv.location':  { es:'Madrid, España', en:'Madrid, Spain', pt:'Madrid, Espanha', fr:'Madrid, Espagne' },
   'cv.download':  { es:'Descargar PDF',  en:'Download PDF',  pt:'Baixar PDF',      fr:'Télécharger PDF' },
@@ -74,10 +74,10 @@ const TRANSLATIONS = {
 
   /* ── CV — summary ── */
   'cv.summary': {
-    es: 'Científico de Datos e Ingeniero de IA especializado en el diseño e implementación de soluciones basadas en LLMs y sistemas de agentes. Experto en la construcción de pipelines de datos y la industrialización de modelos de Machine Learning bajo un enfoque de IA Responsable y ética. Certificaciones avanzadas en Azure AI y sólida base en programación orientada a objetos — combinando excelencia técnica con visión estratégica de negocio y procesos de innovación tecnológica.',
-    en: 'Data Scientist and AI Engineer specializing in the design and implementation of LLM-based solutions and agent systems. Expert in building data pipelines and industrializing Machine Learning models with a focus on Responsible and Ethical AI. Advanced Azure AI certifications and a solid object-oriented programming foundation — combining technical excellence with strategic business vision and technological innovation.',
-    pt: 'Cientista de Dados e Engenheiro de IA especializado no design e implementação de soluções baseadas em LLMs e sistemas de agentes. Especialista na construção de pipelines de dados e industrialização de modelos de Machine Learning com foco em IA Responsável e ética. Certificações avançadas em Azure AI e sólida base em programação orientada a objetos — combinando excelência técnica com visão estratégica de negócio.',
-    fr: 'Data Scientist et Ingénieur IA spécialisé dans la conception et l\'implémentation de solutions basées sur des LLMs et des systèmes d\'agents. Expert en construction de pipelines de données et industrialisation de modèles de Machine Learning avec une approche d\'IA Responsable et éthique. Certifications Azure AI avancées et solide base en programmation orientée objet.',
+    es: 'Ingeniero de Datos e IA: construyo sistemas de IA generativa y agentes, y los pipelines de datos y el MLOps que los llevan a producción. Certificado Azure AI Engineer, con experiencia en Databricks, Docker y CI/CD. Enfoque de IA responsable: explicabilidad, privacidad medida y trazabilidad.',
+    en: 'Data &amp; AI Engineer: I build generative AI and agent systems, plus the data pipelines and MLOps that take them to production. Azure AI Engineer certified, with hands-on Databricks, Docker and CI/CD. Responsible-AI focus: explainability, measured privacy and traceability.',
+    pt: 'Engenheiro de Dados e IA: construo sistemas de IA generativa e agentes, e os pipelines de dados e o MLOps que os levam a produção. Certificado Azure AI Engineer, com experiência em Databricks, Docker e CI/CD. Foco em IA responsável: explicabilidade, privacidade medida e rastreabilidade.',
+    fr: 'Ingénieur Data &amp; IA : je construis des systèmes d\'IA générative et d\'agents, ainsi que les pipelines de données et le MLOps qui les mènent en production. Certifié Azure AI Engineer, avec de l\'expérience en Databricks, Docker et CI/CD. Approche d\'IA responsable : explicabilité, confidentialité mesurée et traçabilité.',
   },
 
   /* ── CV — skill categories ── */
@@ -205,12 +205,20 @@ const TRANSLATIONS = {
     fr: 'Avis Google à partir d\'audio : le client scanne un QR, enregistre son avis et reçoit un texte d\'avis peaufiné prêt à publier. Whisper + Llama via Groq, multi-tenant, déployé avec Docker et en phase de validation utilisateurs.',
   },
 
+  'projects.p9.type': { es:'GenAI · Datos sintéticos · Azure', en:'GenAI · Synthetic Data · Azure', pt:'GenAI · Dados sintéticos · Azure', fr:'GenAI · Données synthétiques · Azure' },
+  'projects.p9.desc': {
+    es: 'Generador de datos sintéticos tabulares orquestado con agentes LangGraph: núcleo determinista (SDV: GaussianCopula, TVAE, CTGAN) y LLM solo para redactar sobre cifras agregadas. Mide fidelidad, utilidad (TSTR/TRTR) y privacidad (DCR, MIA) con varias semillas. Evolución de mi TFM, desplegado en Azure Container Apps con CI/CD, Key Vault y Entra ID.',
+    en: 'Tabular synthetic data generator orchestrated by LangGraph agents: a deterministic core (SDV: GaussianCopula, TVAE, CTGAN) with the LLM only writing from aggregated figures. Measures fidelity, utility (TSTR/TRTR) and privacy (DCR, MIA) across multiple seeds. Evolved from my master\'s thesis, deployed on Azure Container Apps with CI/CD, Key Vault and Entra ID.',
+    pt: 'Gerador de dados sintéticos tabulares orquestrado com agentes LangGraph: núcleo determinístico (SDV: GaussianCopula, TVAE, CTGAN) e LLM apenas para redigir sobre valores agregados. Mede fidelidade, utilidade (TSTR/TRTR) e privacidade (DCR, MIA) com várias sementes. Evolução do meu TFM, implantado no Azure Container Apps com CI/CD, Key Vault e Entra ID.',
+    fr: 'Générateur de données synthétiques tabulaires orchestré par des agents LangGraph : noyau déterministe (SDV : GaussianCopula, TVAE, CTGAN) et LLM uniquement pour rédiger à partir de chiffres agrégés. Mesure fidélité, utilité (TSTR/TRTR) et confidentialité (DCR, MIA) sur plusieurs graines. Évolution de mon mémoire de master, déployé sur Azure Container Apps avec CI/CD, Key Vault et Entra ID.',
+  },
+
   'projects.p7.type': { es:'Machine Learning · Finanzas', en:'Machine Learning · Finance', pt:'Machine Learning · Finanças', fr:'Machine Learning · Finance' },
   'projects.p7.desc': {
-    es: 'Scoring de riesgo crediticio de principio a fin: XGBoost sobre 307.000 préstamos reales de Home Credit (AUC 0.78), explicabilidad SHAP con reason codes que excluyen atributos protegidos, comparativa con Deep Learning y API de scoring con FastAPI + Docker.',
-    en: 'End-to-end credit risk scoring: XGBoost on 307,000 real Home Credit loans (AUC 0.78), SHAP explainability with reason codes that exclude protected attributes, a Deep Learning comparison and a scoring API with FastAPI + Docker.',
-    pt: 'Scoring de risco de crédito de ponta a ponta: XGBoost sobre 307.000 empréstimos reais da Home Credit (AUC 0.78), explicabilidade SHAP com reason codes que excluem atributos protegidos, comparativa com Deep Learning e API de scoring com FastAPI + Docker.',
-    fr: 'Scoring de risque de crédit de bout en bout : XGBoost sur 307 000 prêts réels Home Credit (AUC 0.78), explicabilité SHAP avec des reason codes excluant les attributs protégés, comparaison Deep Learning et API de scoring FastAPI + Docker.',
+    es: 'Scoring de riesgo crediticio de principio a fin: XGBoost sobre 307.000 préstamos reales de Home Credit (AUC 0.78), explicabilidad SHAP con reason codes que excluyen atributos protegidos, comparativa con Deep Learning, API de scoring con FastAPI + Docker y versión lakehouse en Databricks (Delta, MLflow, Unity Catalog).',
+    en: 'End-to-end credit risk scoring: XGBoost on 307,000 real Home Credit loans (AUC 0.78), SHAP explainability with reason codes that exclude protected attributes, a Deep Learning comparison, a scoring API with FastAPI + Docker and a lakehouse version on Databricks (Delta, MLflow, Unity Catalog).',
+    pt: 'Scoring de risco de crédito de ponta a ponta: XGBoost sobre 307.000 empréstimos reais da Home Credit (AUC 0.78), explicabilidade SHAP com reason codes que excluem atributos protegidos, comparativa com Deep Learning, API de scoring com FastAPI + Docker e versão lakehouse no Databricks (Delta, MLflow, Unity Catalog).',
+    fr: 'Scoring de risque de crédit de bout en bout : XGBoost sur 307 000 prêts réels Home Credit (AUC 0.78), explicabilité SHAP avec des reason codes excluant les attributs protégés, comparaison Deep Learning, API de scoring FastAPI + Docker et version lakehouse sur Databricks (Delta, MLflow, Unity Catalog).',
   },
 
   'projects.p8.type': { es:'OSINT · Inteligencia Marítima', en:'OSINT · Maritime Intelligence', pt:'OSINT · Inteligência Marítima', fr:'OSINT · Renseignement Maritime' },

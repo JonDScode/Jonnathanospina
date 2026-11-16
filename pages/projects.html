@@ -137,6 +137,26 @@
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-index">01 /</div>
+                <h3 class="project-title">Synthetix</h3>
+                <p class="project-type" data-i18n="projects.p9.type">GenAI · Datos sintéticos · Azure</p>
+                <p class="project-description" data-i18n="projects.p9.desc">Generador de datos sintéticos tabulares orquestado con agentes LangGraph: núcleo determinista (SDV: GaussianCopula, TVAE, CTGAN) y LLM solo para redactar sobre cifras agregadas. Mide fidelidad, utilidad (TSTR/TRTR) y privacidad (DCR, MIA) con varias semillas. Evolución de mi TFM, desplegado en Azure Container Apps con CI/CD, Key Vault y Entra ID.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">LangGraph</span>
+                    <span class="tech-tag">SDV</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">React · TypeScript</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Azure Container Apps</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/JonDScode/Synthetix" class="project-link" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-index">02 /</div>
                 <h3 class="project-title">Nautikos</h3>
                 <p class="project-type" data-i18n="projects.p8.type">OSINT · Inteligencia Marítima</p>
                 <p class="project-description" data-i18n="projects.p8.desc">Plataforma de inteligencia geoespacial en tiempo real sobre la base open source OSIRIS: mapa WebGL con miles de entidades en vivo (tráfico aéreo y marítimo, sismos, sanciones OFAC, eventos GDELT), scoring de riesgo país y análisis con IA. Especialización marítima propia en desarrollo: chokepoints, AIS y riesgo de cadena de suministro.</p>
@@ -154,10 +174,10 @@
             </div>
 
             <div class="project-card">
-                <div class="project-index">02 /</div>
+                <div class="project-index">03 /</div>
                 <h3 class="project-title">Credit Risk Lab</h3>
                 <p class="project-type" data-i18n="projects.p7.type">Machine Learning · Finanzas</p>
-                <p class="project-description" data-i18n="projects.p7.desc">Scoring de riesgo crediticio de principio a fin: XGBoost sobre 307.000 préstamos reales de Home Credit (AUC 0.78), explicabilidad SHAP con reason codes que excluyen atributos protegidos, comparativa con Deep Learning y API de scoring con FastAPI + Docker.</p>
+                <p class="project-description" data-i18n="projects.p7.desc">Scoring de riesgo crediticio de principio a fin: XGBoost sobre 307.000 préstamos reales de Home Credit (AUC 0.78), explicabilidad SHAP con reason codes que excluyen atributos protegidos, comparativa con Deep Learning, API de scoring con FastAPI + Docker y versión lakehouse en Databricks (Delta, MLflow, Unity Catalog).</p>
                 <div class="project-tech">
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">XGBoost</span>
@@ -166,6 +186,8 @@
                     <span class="tech-tag">FastAPI</span>
                     <span class="tech-tag">Docker</span>
                     <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Databricks</span>
+                    <span class="tech-tag">MLflow</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/JonDScode/credit-risk-lab" class="project-link" target="_blank" rel="noopener">GitHub</a>
@@ -173,7 +195,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-index">03 /</div>
+                <div class="project-index">04 /</div>
                 <h3 class="project-title">Soccer Analytics Lab</h3>
                 <p class="project-type" data-i18n="projects.p1.type">Data Science · Sports Analytics</p>
                 <p class="project-description" data-i18n="projects.p1.desc">Laboratorio de ciencia de datos aplicada al fútbol: modelos de goles esperados (xG), forecasting de resultados (Poisson / Dixon-Coles), redes de pases y scouting de jugadores sobre event data profesional.</p>
@@ -191,7 +213,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-index">04 /</div>
+                <div class="project-index">05 /</div>
                 <h3 class="project-title">Dictum</h3>
                 <p class="project-type" data-i18n="projects.p2.type">GenAI · Agentes</p>
                 <p class="project-description" data-i18n="projects.p2.desc">Tutor agéntico de inglés: agente conversacional construido sobre Claude con voz híbrida (STT/TTS) y app universal iOS / Android / web. Monorepo TypeScript con arquitectura de agentes.</p>
@@ -208,7 +230,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-index">05 /</div>
+                <div class="project-index">06 /</div>
                 <h3 class="project-title">Fire Detection</h3>
                 <p class="project-type" data-i18n="projects.p5.type">Deep Learning · Computer Vision</p>
                 <p class="project-description" data-i18n="projects.p5.desc">Detección temprana de incendios en imágenes mediante redes neuronales convolucionales. Proyecto desarrollado en el bootcamp Saturdays AI Madrid (6ª edición, 2023).</p>
@@ -224,7 +246,7 @@
             </div>
 
             <div class="project-card">
-                <div class="project-index">06 /</div>
+                <div class="project-index">07 /</div>
                 <h3 class="project-title">Dilofácil</h3>
                 <p class="project-type" data-i18n="projects.p6.type">GenAI · Producto SaaS</p>
                 <p class="project-description" data-i18n="projects.p6.desc">Reseñas de Google a partir de audio: el cliente escanea un QR, graba su opinión y recibe una reseña de texto pulida lista para publicar. Whisper + Llama vía Groq, multi-tenant, desplegado con Docker y en fase de validación con usuarios.</p>
