@@ -26,17 +26,17 @@ const TRANSLATIONS = {
   /* ── INDEX — cards ── */
   'index.card1.title': { es:'AI Engineering', en:'AI Engineering', pt:'AI Engineering', fr:'Ingénierie IA' },
   'index.card1.desc': {
-    es: 'Diseño e implementación de sistemas inteligentes basados en LLMs, pipelines de datos y arquitecturas de agentes. IA lista para producción, con enfoque en calidad y trazabilidad.',
-    en: 'Design and implementation of intelligent systems based on LLMs, data pipelines and agent architectures. Production-ready AI, focused on quality and traceability.',
-    pt: 'Conceção e implementação de sistemas inteligentes baseados em LLMs, pipelines de dados e arquiteturas de agentes. IA pronta para produção, focada em qualidade e rastreabilidade.',
-    fr: 'Conception et déploiement de systèmes intelligents basés sur des LLMs, pipelines de données et architectures d\'agents. IA prête pour la production, axée sur la qualité.',
+    es: 'Sistemas basados en LLMs y agentes con una frontera clara entre lo determinista y lo generado. Evaluación medida y despliegue en producción con Docker, CI/CD y Azure.',
+    en: 'LLM and agent systems with a clear boundary between what is deterministic and what is generated. Measured evaluation and production deployment with Docker, CI/CD and Azure.',
+    pt: 'Sistemas baseados em LLMs e agentes com uma fronteira clara entre o determinístico e o gerado. Avaliação medida e implantação em produção com Docker, CI/CD e Azure.',
+    fr: 'Systèmes à base de LLMs et d’agents avec une frontière claire entre le déterministe et le généré. Évaluation mesurée et déploiement en production avec Docker, CI/CD et Azure.',
   },
-  'index.card2.title': { es:'Data Science', en:'Data Science', pt:'Data Science', fr:'Data Science' },
+  'index.card2.title': { es:'Data Engineering', en:'Data Engineering', pt:'Data Engineering', fr:'Ingénierie Data' },
   'index.card2.desc': {
-    es: 'Modelado estadístico, análisis predictivo y visualización avanzada. Transformando datos complejos en conocimiento accionable con metodología rigurosa.',
-    en: 'Statistical modeling, predictive analytics and advanced visualization. Turning complex data into actionable knowledge with rigorous methodology.',
-    pt: 'Modelagem estatística, análise preditiva e visualização avançada. Transformando dados complexos em conhecimento acionável com metodologia rigorosa.',
-    fr: 'Modélisation statistique, analyse prédictive et visualisation avancée. Transformer des données complexes en connaissances actionnables.',
+    es: 'Pipelines de datos y lakehouse: ingesta, transformación y calidad con Python y SQL, tablas Delta, MLflow y Unity Catalog en Databricks. Modelos de ML industrializados con trazabilidad.',
+    en: 'Data pipelines and lakehouse: ingestion, transformation and quality with Python and SQL, Delta tables, MLflow and Unity Catalog on Databricks. ML models industrialized with traceability.',
+    pt: 'Pipelines de dados e lakehouse: ingestão, transformação e qualidade com Python e SQL, tabelas Delta, MLflow e Unity Catalog no Databricks. Modelos de ML industrializados com rastreabilidade.',
+    fr: 'Pipelines de données et lakehouse : ingestion, transformation et qualité avec Python et SQL, tables Delta, MLflow et Unity Catalog sur Databricks. Modèles de ML industrialisés avec traçabilité.',
   },
   'index.card3.title': { es:'GenAI &amp; Agentes', en:'GenAI &amp; Agents', pt:'GenAI &amp; Agentes', fr:'GenAI &amp; Agents' },
   'index.card3.desc': {
