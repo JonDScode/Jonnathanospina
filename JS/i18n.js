@@ -112,10 +112,10 @@ const TRANSLATIONS = {
   'cv.exp2.title': { es:'Desarrollador de Software &amp; Productos de IA', en:'Software &amp; AI Product Developer', pt:'Desenvolvedor de Software &amp; Produtos de IA', fr:'Développeur Logiciel &amp; Produits IA' },
   'cv.exp2.company': { es:'Freelance — Autónomo &nbsp;·&nbsp; Madrid', en:'Freelance — Self-employed &nbsp;·&nbsp; Madrid', pt:'Freelance — Autónomo &nbsp;·&nbsp; Madrid', fr:'Freelance — Indépendant &nbsp;·&nbsp; Madrid' },
   'cv.exp2.b1': {
-    es: '<strong>Productos GenAI propios:</strong> Desarrollo y opero productos GenAI en producción: SaaS multi-tenant de reseñas por voz (FastAPI, Whisper y Llama vía Groq, Docker) y tutor de idiomas agéntico construido sobre Claude.',
-    en: '<strong>Own GenAI products:</strong> I build and run GenAI products in production: a multi-tenant voice-review SaaS (FastAPI, Whisper and Llama via Groq, Docker) and an agentic language tutor built on Claude.',
-    pt: '<strong>Produtos GenAI próprios:</strong> Desenvolvo e opero produtos GenAI em produção: SaaS multi-tenant de reviews por voz (FastAPI, Whisper e Llama via Groq, Docker) e tutor de idiomas agêntico construído sobre Claude.',
-    fr: '<strong>Produits GenAI propres :</strong> Je développe et exploite des produits GenAI en production : SaaS multi-tenant d’avis vocaux (FastAPI, Whisper et Llama via Groq, Docker) et tuteur de langues agentique construit sur Claude.',
+    es: '<strong>Productos GenAI propios:</strong> Desarrollo productos GenAI desplegados: SaaS multi-tenant de reseñas por voz (FastAPI, Whisper y Llama vía Groq, Docker) y tutor de idiomas agéntico construido sobre Claude.',
+    en: '<strong>Own GenAI products:</strong> I build deployed GenAI products: a multi-tenant voice-review SaaS (FastAPI, Whisper and Llama via Groq, Docker) and an agentic language tutor built on Claude.',
+    pt: '<strong>Produtos GenAI próprios:</strong> Desenvolvo produtos GenAI implantados: SaaS multi-tenant de reviews por voz (FastAPI, Whisper e Llama via Groq, Docker) e tutor de idiomas agêntico construído sobre Claude.',
+    fr: '<strong>Produits GenAI propres :</strong> Je développe des produits GenAI déployés : SaaS multi-tenant d’avis vocaux (FastAPI, Whisper et Llama via Groq, Docker) et tuteur de langues agentique construit sur Claude.',
   },
   'cv.exp2.b2': {
     es: '<strong>Desarrollo web:</strong> Sitios e-commerce y aplicaciones web para clientes, con enfoque frontend.',
